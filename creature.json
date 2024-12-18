@@ -1,0 +1,39 @@
+{
+  "Blazehorn": {
+    "index": "blazehorn",
+    "name": "Blazehorn",
+    "desc": "“I’m sure some alchemist’s to blame for this.” Flame Throwers. Blazehorns are hulking, hoofed mammals whose bodies produce a substance like alche- mist’s fire. A blazehorn can launch this volatile material from a hump on its back. With an unending supply of fire, blazehorns love spreading destruction. Their young thrive in burned areas, feeding on scorched plant material, burnt resinous trees, and ash. Destruction Untamed. Numerous alchemists have sought to tame blazehorns to simplify the creation of their volatile elixirs. Every attempt has ended in failure. The fiery nature of a blazehorn has proven impossible to curb for long.",
+    "salvage": "",
+    "lore": null,
+    "size": "",
+    "type": "",
+    "alignment": "",
+    "armor_class": null,
+    "hit_points": 0,
+    "hit_dice": "",
+    "hit_points_roll": "",
+    "speed": {},
+    "strength": 0,
+    "dexterity": 0,
+    "constitution": 0,
+    "intelligence": 0,
+    "wisdom": 0,
+    "charisma": 0,
+    "proficiencies": null,
+    "damage_vulnerabilities": null,
+    "damage_resistances": null,
+    "damage_immunities": null,
+    "condition_immunities": null,
+    "senses": {
+      "passive_perception": 0
+    },
+    "languages": "",
+    "challenge_rating": 0,
+    "proficiency_bonus": 0,
+    "xp": 0,
+    "special_abilities": null,
+    "actions": null,
+    "reactions": null,
+    "legendary_actions": null
+  }
+}

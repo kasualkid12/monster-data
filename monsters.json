@@ -1,0 +1,1748 @@
+[
+  {
+    "monsters": {
+      "amorphous_horror": {
+        "index": "amorphous-horror",
+        "name": "Amorphous Horror",
+        "desc": "\"Children sing nursery rhymes about suspicious strangers for a reason. Heed the tales and check them for tentacles before offering shelter.\"\n\nAbominable Experiment: In desperate times science and magic can progress by leaps and bounds, but such rapid advancement has its risks. Without proper precautions, experimenters or their subjects might be caught in forces beyond imagining and become twisted into something abominable. No two mishaps are alike, yet each of the misbegotten results is known as an aberrant horror.\n\nWarped Flesh: Those who survive the uncontrolled transformation into aberrant horrors become living weapons. Some theories say the body sees the transmuting force as a threat and evolves defenses against it. Others believe that the accident triggers dormant bestial adaptations from the distant past. Whatever the reason, aberrant horrors are vicious combatants, armed with hardened claws, venomous spines, and other strange adaptations.",
+        "salvage": "Aberrant horrors have been saturated in eldritch energies. Each horror’s body can provide a number of material components for arcane necromancy or transmutation spells equal to half the horror’s challenge rating.",
+        "lore": [
+          "DC 10 Intelligence (History): Aberrant horrors are the results of failed arcane experiments that twist the body into unnatural forms.",
+          "DC 15 Intelligence (Arcana): Each aberrant horror is different. Some grow extra limbs, others dissolve into oozelike creatures, and others swell to massive proportions. They contain eldritch energy that can fuel necromancy and transmutation."
+        ],
+        "size": "Medium",
+        "type": "aberration",
+        "alignment": "any alignment",
+        "armor_class": [
+          {
+            "type": "natural",
+            "value": 14
+          }
+        ],
+        "hit_points": 127,
+        "hit_dice": "15d8",
+        "hit_points_roll": "15d8+60",
+        "speed": {
+          "walk": "30 ft.",
+          "climb": "30 ft."
+        },
+        "strength": 16,
+        "dexterity": 10,
+        "constitution": 19,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 7,
+        "proficiencies": [
+          {
+            "value": 3,
+            "proficiency": {
+              "index": "skill-perception",
+              "name": "Skill: Perception"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [],
+        "damage_immunities": ["acid"],
+        "condition_immunities": ["prone"],
+        "senses": {
+          "blindsight": "30 ft.",
+          "passive_perception": 13
+        },
+        "languages": "any two languages",
+        "challenge_rating": 5,
+        "proficiency_bonus": 3,
+        "xp": 1800,
+        "special_abilities": [
+          {
+            "name": "Amorphous",
+            "desc": "The amorphous horror can move through a space as narrow as 1 inch wide without squeezing."
+          },
+          {
+            "name": "Shapechanger",
+            "desc": "The amorphous horror can use an action or a bonus action to polymorph into a form that resembles its Small or Medium humanoid appearance before it became a horror. Its statistics are the same in each form. Any equipment it is wearing or carrying isn’t transformed. It reverts to its true Medium form if it dies."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The amorphous horror makes two slam attacks.",
+            "attack_bonus": 6,
+            "damage": []
+          },
+          {
+            "name": "Slam",
+            "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) bludgeoning damage and 9 (2d8) acid damage.",
+            "attack_bonus": 6,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "bludgeoning",
+                  "name": "Bludgeoning"
+                },
+                "damage_dice": "1d8+3"
+              },
+              {
+                "damage_type": {
+                  "index": "acid",
+                  "name": "Acid"
+                },
+                "damage_dice": "2d8"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "reactions": [
+          {
+            "name": "Split",
+            "desc": "When an amorphous horror that is Medium or larger drops below half its hit points but has at least 10 hit points, it splits into two new horrors. Each new horror has hit points equal to half the original horror’s, rounded down. New horrors are one size smaller than the original horror."
+          }
+        ],
+        "legendary_actions": []
+      },
+      "whipskein_horror": {
+        "index": "whipskein-horror",
+        "name": "Whipskein Horror",
+        "desc": "\"Children sing nursery rhymes about suspicious strangers for a reason. Heed the tales and check them for tentacles before offering shelter.\"\n\nAbominable Experiment: In desperate times science and magic can progress by leaps and bounds, but such rapid advancement has its risks. Without proper precautions, experimenters or their subjects might be caught in forces beyond imagining and become twisted into something abominable. No two mishaps are alike, yet each of the misbegotten results is known as an aberrant horror.\n\nWarped Flesh: Those who survive the uncontrolled transformation into aberrant horrors become living weapons. Some theories say the body sees the transmuting force as a threat and evolves defenses against it. Others believe that the accident triggers dormant bestial adaptations from the distant past. Whatever the reason, aberrant horrors are vicious combatants, armed with hardened claws, venomous spines, and other strange adaptations.",
+        "salvage": "Aberrant horrors have been saturated in eldritch energies. Each horror’s body can provide a number of material components for arcane necromancy or transmutation spells equal to half the horror’s challenge rating.",
+        "lore": [
+          "DC 10 Intelligence (History): Aberrant horrors are the results of failed arcane experiments that twist the body into unnatural forms.",
+          "DC 15 Intelligence (Arcana): Each aberrant horror is different. Some grow extra limbs, others dissolve into oozelike creatures, and others swell to massive proportions. They contain eldritch energy that can fuel necromancy and transmutation."
+        ],
+        "size": "Medium",
+        "type": "aberration",
+        "alignment": "any alignment",
+        "armor_class": [
+          {
+            "type": "studded leather",
+            "value": 14
+          }
+        ],
+        "hit_points": 97,
+        "hit_dice": "15d8",
+        "hit_points_roll": "15d8+30",
+        "speed": {
+          "walk": "30 ft."
+        },
+        "strength": 15,
+        "dexterity": 14,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 8,
+        "proficiencies": [
+          {
+            "value": 4,
+            "proficiency": {
+              "index": "saving-throw-dex",
+              "name": "Saving Throw: Dex"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [],
+        "damage_immunities": [],
+        "condition_immunities": [],
+        "senses": {
+          "darkvision": "60 ft.",
+          "passive_perception": 12
+        },
+        "languages": "any two languages",
+        "challenge_rating": 4,
+        "proficiency_bonus": 2,
+        "xp": 1100,
+        "special_abilities": [
+          {
+            "name": "False Appearance",
+            "desc": "While the whipskein horror hides its tendrils from sight, such as under clothing, it is indistinguishable from the ordinary humanoid it once was."
+          }
+        ],
+        "actions": [],
+        "legendary_actions": []
+      },
+      "shifting_hulk": {
+        "index": "shifting-hulk",
+        "name": "Shifting Hulk",
+        "desc": "\"Children sing nursery rhymes about suspicious strangers for a reason. Heed the tales and check them for tentacles before offering shelter.\"\n\nAbominable Experiment: In desperate times science and magic can progress by leaps and bounds, but such rapid advancement has its risks. Without proper precautions, experimenters or their subjects might be caught in forces beyond imagining and become twisted into something abominable. No two mishaps are alike, yet each of the misbegotten results is known as an aberrant horror.\n\nWarped Flesh: Those who survive the uncontrolled transformation into aberrant horrors become living weapons. Some theories say the body sees the transmuting force as a threat and evolves defenses against it. Others believe that the accident triggers dormant bestial adaptations from the distant past. Whatever the reason, aberrant horrors are vicious combatants, armed with hardened claws, venomous spines, and other strange adaptations.",
+        "salvage": "Aberrant horrors have been saturated in eldritch energies. Each horror’s body can provide a number of material components for arcane necromancy or transmutation spells equal to half the horror’s challenge rating.",
+        "lore": [
+          "DC 10 Intelligence (History): Aberrant horrors are the results of failed arcane experiments that twist the body into unnatural forms.",
+          "DC 15 Intelligence (Arcana): Each aberrant horror is different. Some grow extra limbs, others dissolve into oozelike creatures, and others swell to massive proportions. They contain eldritch energy that can fuel necromancy and transmutation."
+        ],
+        "size": "Large",
+        "type": "aberration",
+        "alignment": "any alignment",
+        "armor_class": [
+          {
+            "type": "natural",
+            "value": 16
+          }
+        ],
+        "hit_points": 168,
+        "hit_dice": "16d10",
+        "hit_points_roll": "16d10+80",
+        "speed": {
+          "walk": "30 ft."
+        },
+        "strength": 20,
+        "dexterity": 10,
+        "constitution": 20,
+        "intelligence": 9,
+        "wisdom": 11,
+        "charisma": 6,
+        "proficiencies": [
+          {
+            "value": 4,
+            "proficiency": {
+              "index": "skill-perception",
+              "name": "Skill: Perception"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [],
+        "damage_immunities": [],
+        "condition_immunities": [],
+        "senses": {
+          "darkvision": "60 ft.",
+          "passive_perception": 14
+        },
+        "languages": "understands one language but can’t speak",
+        "challenge_rating": 9,
+        "proficiency_bonus": 4,
+        "xp": 5000,
+        "special_abilities": [
+          {
+            "name": "Aberrant Wound",
+            "desc": "If a creature other than an undead or a construct takes damage from the shifting hulk’s attacks, the creature must succeed on a DC 17 Constitution saving throw or lose 5 (2d4) hit points at the start of each of its turns due to an aberrant wound. This damage is cumulative. A creature can take an action to staunch the wound, ending this effect with a successful DC 15 Wisdom (Medicine) check. The wound also closes if the target receives magical healing."
+          },
+          {
+            "name": "Vicious Critical",
+            "desc": "When the shifting hulk scores a critical hit with an attack, it can roll the attack’s damage dice three times instead of twice."
+          },
+          {
+            "name": "Fast Healing",
+            "desc": "While at half its hit points or fewer, the shifting hulk regains 10 hit points at the start of each of its turns. This trait doesn’t function while the hulk has 0 hit points."
+          },
+          {
+            "name": "Shapechanger",
+            "desc": "The shifting hulk can use an action or a bonus action to polymorph into a form that resembles its Small or Medium humanoid appearance before it became a horror. Its statistics are the same in each form. Any equipment it is wearing or carrying isn’t transformed. It reverts to its true Large form if it dies."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The shifting hulk makes two attacks and uses frightening attacks.",
+            "attack_bonus": 9,
+            "damage": []
+          },
+          {
+            "name": "Claw",
+            "desc": "Melee Weapon Attack: +9 to hit, reach 5 ft., one target. Hit: 19 (4d6 + 5) slashing damage and Aberrant Wound.",
+            "attack_bonus": 9,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "slashing",
+                  "name": "Slashing"
+                },
+                "damage_dice": "4d6+5"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Spine",
+            "desc": "Ranged Weapon Attack: +9 to hit, range 30/60 ft., one target. Hit: 18 (3d8 + 5) piercing damage and Aberrant Wound.",
+            "attack_bonus": 9,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "piercing",
+                  "name": "Piercing"
+                },
+                "damage_dice": "3d8+5"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Frightening Attacks",
+            "desc": "Each creature of the shifting hulk’s choice within 30 feet of the hulk and aware of it must succeed on a DC 12 Wisdom saving throw or become frightened for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a creature’s saving throw is successful or the effect ends for it, the creature is immune to the hulk’s frightening attacks for the next 24 hours or until it scores a critical hit, whichever comes first."
+          }
+        ],
+        "legendary_actions": []
+      },
+      "angel_of_empyreus": {
+        "index": "angel-of-empyreus",
+        "name": "Angel of Empyreus",
+        "desc": "\"I am that which can cleanse temptation from the land and restore it once more to divinity. What a weak creature of flesh you are, blessed with free will and fickle fancy. I will reveal your weakness, wretched mortal.\"\n\nA Celestial Commander. These valorous angels were created to punish the wicked and ensure the sincerity of the penitent. When Maligant called his heavenly hosts in the war of the Four Divines, the angels marshaled out with the other upper echelons under the command of the Arch Seraph Empyreus. When Aurelia sacrificed herself and revealed the madness of the war, the Angels fought on, refusing to admit that they were part of a calamitous tragedy, seeing surrender as tantamount to blasphemy. With the zeal of a censorious bureaucratic tyrant, they now wage a guerilla war with a piecemeal retinue of veteran battle angels, zealots, fanatic paladins, cohorts of penitent levies, and volunteer convert militia auxiliaries as part of an anti-corruption peasant revolt in the hinterland of Altenheim.\n\nFiendish Temptation. Each Angel keeps a copper cage under a velveteen cover inside a lead box encased in blessed orichalcum on a thick chain around its neck. In the cage is a pathetic, impish fiend of Malikir, withered like a raisin. The creature has an uncanny knack for teasing out corruption and compelling wicked behavior in mortals. It only takes moments to get a confession once a weak-willed mortal has revealed their true self in the presence of the fiend.\n\nA Corrupted Temperance. An Angel of Empyreus uses its original orders as a pretext for further violence. It will never surrender. Surrender is a trick of the enemy. It must fulfill its purpose: to root out corruption and sin, and it will do anything to find sin in mortal hearts. The imp claims to put mortals to the test, and the Angel knows what it is doing. It won’t kill the imp, as using the imp reveals the innate corruption in mortal souls.\"",
+        "salvage": "The Angel of Empyreus wields a holy avenger. Upon its death, its intelligence inhabits the sword. To attune to it, a paladin character must agree to carry on the angel’s mission to cleanse the land of immorality. A cup of its blood can be made into a potion of supreme healing with a DC 10 Intelligence (Religion) check from someone proficient with alchemist’s supplies. Six cups of blood can be taken from the Angel of Empyreus. Its bones can be used in place of diamonds for use in raise dead and similar magic, up to the equivalent of 10,000 gp worth.",
+        "lore": [
+          "DC 10 Intelligence (Religion): The Arch Seraphs are attended by mighty angels who act as their lieutenants and execute the divine remnants’ orders.",
+          "DC 15 Intelligence (History): Empyreus went into battle surrounded by an honor guard of fearsome celestials honed by aeons of divine war. Many of them remained at Empyreus’ side at the end of the Four Divines’ War, but not all remained loyal.",
+          "DC 20 Intelligence (History): Peasant revolts and religious zealotry are on the rise in the Altenheim hinterland. Most say it’s the usual grievances, but some whisper that a commander of the celestial hosts leads the revolt, and its ranks swell by the day."
+        ],
+        "size": "Large",
+        "type": "celestial",
+        "alignment": "lawful neutral",
+        "armor_class": [
+          {
+            "type": "natural",
+            "value": 21
+          }
+        ],
+        "hit_points": 445,
+        "hit_dice": "33d10",
+        "hit_points_roll": "33d10+264",
+        "speed": {
+          "walk": "40 ft.",
+          "fly": "90 ft."
+        },
+        "strength": 29,
+        "dexterity": 23,
+        "constitution": 26,
+        "intelligence": 25,
+        "wisdom": 18,
+        "charisma": 30,
+        "proficiencies": [
+          {
+            "value": 16,
+            "proficiency": {
+              "index": "saving-throw-str",
+              "name": "Saving Throw: STR"
+            }
+          },
+          {
+            "value": 14,
+            "proficiency": {
+              "index": "saving-throw-int",
+              "name": "Saving Throw: INT"
+            }
+          },
+          {
+            "value": 11,
+            "proficiency": {
+              "index": "saving-throw-wis",
+              "name": "Saving Throw: WIS"
+            }
+          },
+          {
+            "value": 17,
+            "proficiency": {
+              "index": "saving-throw-cha",
+              "name": "Saving Throw: CHA"
+            }
+          },
+          {
+            "value": 14,
+            "proficiency": {
+              "index": "skill-arcana",
+              "name": "Skill: Arcana"
+            }
+          },
+          {
+            "value": 11,
+            "proficiency": {
+              "index": "skill-insight",
+              "name": "Skill: Insight"
+            }
+          },
+          {
+            "value": 17,
+            "proficiency": {
+              "index": "skill-intimidation",
+              "name": "Skill: Intimidation"
+            }
+          },
+          {
+            "value": 14,
+            "proficiency": {
+              "index": "skill-investigation",
+              "name": "Skill: Investigation"
+            }
+          },
+          {
+            "value": 11,
+            "proficiency": {
+              "index": "skill-perception",
+              "name": "Skill: Perception"
+            }
+          },
+          {
+            "value": 14,
+            "proficiency": {
+              "index": "skill-religion",
+              "name": "Skill: Religion"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [
+          "fire",
+          "lightning",
+          "radiant",
+          "bludgeoning",
+          "piercing",
+          "slashing from nonmagical weapons"
+        ],
+        "damage_immunities": ["cold", "necrotic", "poison"],
+        "condition_immunities": [
+          "blinded",
+          "charmed",
+          "deafened",
+          "exhaustion",
+          "frightened",
+          "poisoned"
+        ],
+        "senses": {
+          "truesight": "120 ft.",
+          "passive_perception": 21
+        },
+        "languages": "all, telepathy 120 ft.",
+        "challenge_rating": 22,
+        "proficiency_bonus": 7,
+        "xp": 41000,
+        "special_abilities": [
+          {
+            "name": "Celestial Arsenal",
+            "desc": "The Angel of Empyreus’ weapon attacks are magical. When it hits with any weapon, the weapon deals an extra 27 (6d8) radiant damage (included in the attack)."
+          },
+          {
+            "name": "Authoritative Mien",
+            "desc": "The Angel of Empyreus can cast the command spell at will (spell save DC 25)."
+          },
+          {
+            "name": "Divine Awareness",
+            "desc": "The Angel of Empyreus knows if it hears a lie."
+          },
+          {
+            "name": "Holy Aura",
+            "desc": "The Angel of Empyreus can project a 60-ft. aura of holiness as a bonus action. The aura affects all creatures within its area unless the Angel of Empyreus chooses to exclude a creature from the effect. A creature remains under the aura’s effect until it leaves the area, dies, or when the Angel of Empyreus chooses a new aura effect. Only one effect may be active at a time:\n• Judgement. Creatures who start their turn in the aura must succeed on a DC 25 Charisma saving throw. On a failure, the creature gains a level of exhaustion as intensified feelings of guilt, doubt, remorse, and self-criticism overwhelm the affected creature. Creatures who succeed on the saving throw are immune to the effect for one hour.\n• Valor. Creatures who start their turn in the aura gain 15 temporary hit points, cannot be charmed or frightened, and have advantage on saving throws against spells and other magical effects."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The Angel of Empyreus can make three attacks with its holy avenger.",
+            "attack_bonus": 24,
+            "damage": []
+          },
+          {
+            "name": "Holy Avenger",
+            "desc": "Melee Weapon Attack: +24 to hit, reach 10 ft., one target. Hit: 23 (4d6 + 9) slashing damage plus 27 (6d8) radiant damage. If the target is a fiend or undead, it takes an additional 22 (4d10) radiant damage.",
+            "attack_bonus": 24,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "slashing",
+                  "name": "Slashing"
+                },
+                "damage_dice": "4d6+9"
+              },
+              {
+                "damage_type": {
+                  "index": "radiant",
+                  "name": "Radiant"
+                },
+                "damage_dice": "6d8"
+              },
+              {
+                "damage_type": {
+                  "index": "radiant",
+                  "name": "Radiant"
+                },
+                "damage_dice": "4d10"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Blazing Radiance (Recharge 5-6)",
+            "desc": "The Angel of Empyreus unleashes holy fire in a 60-foot cone. Each creature in that area must succeed on a DC 25 Dexterity saving throw or take 35 (10d6) fire and 35 (10d6) radiant damage. Creatures take half damage on a success.",
+            "attack_bonus": 0,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "fire",
+                  "name": "Fire"
+                },
+                "damage_dice": "10d6"
+              },
+              {
+                "damage_type": {
+                  "index": "radiant",
+                  "name": "Radiant"
+                },
+                "damage_dice": "10d6"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": [
+          {
+            "name": "Fly",
+            "desc": "The Angel of Empyreus flies up to half its fly speed.",
+            "actions": []
+          },
+          {
+            "name": "Sword",
+            "desc": "The Angel of Empyreus makes a holy avenger attack.",
+            "actions": []
+          },
+          {
+            "name": "Hurl Sword (2 actions)",
+            "desc": "The Angel of Empyreus hurls its sword in a 30-foot line that is 5-feet wide. Each creature in that line must succeed on a DC 24 Dexterity saving throw or take 23 (4d6 + 9) slashing damage plus 27 (6d8) radiant damage. The sword immediately returns to its hand.",
+            "actions": []
+          },
+          {
+            "name": "Recharge",
+            "desc": "The Angel of Empyreus recharges its Blazing Radiance.",
+            "actions": []
+          }
+        ]
+      },
+      "anguisher": {
+        "index": "anguisher",
+        "name": "Anguisher",
+        "desc": "\"Some suffering never ends. It coalesces in cold darkness, gaining alien sapience.\"\n\nAberrant Torment. Mental suffering can last far longer than physical damage. Psychic energy from those who die in extreme anguish might open a portal, allowing consciousness from beyond the veil to meld with psychic residue.\n\nOld Wounds. The touch or aura of an anguisher calls old wounds and tormentors to mind. The creature uses invisibility and stealth to lurk around potential victims, slowly draining them of life through this recalled suffering.",
+        "salvage": "An anguisher discorporates into thick, black goo when slain. Someone who has proficiency with alchemist’s supplies can refine and dehydrate this goo in a process that takes 1 day of work and a successful DC 10 Intelligence or Wisdom check. If it succeeds, the process creates dust of disappearance.",
+        "lore": [
+          "DC 10 Intelligence (History): Anguishers are semisolid horrors from beyond reality.",
+          "DC 15 Intelligence (Arcana): An anguisher shares many traits and immunities with semicorporeal undead, such as shadows. If an anguisher slays a sapient creature, a new anguisher emerges into the world near the corpse 3 days later."
+        ],
+        "size": "Medium",
+        "type": "aberration",
+        "alignment": "chaotic evil",
+        "armor_class": [
+          {
+            "type": "natural",
+            "value": 13
+          }
+        ],
+        "hit_points": 65,
+        "hit_dice": "10d8",
+        "hit_points_roll": "10d8+20",
+        "speed": {
+          "walk": "30 ft."
+        },
+        "strength": 8,
+        "dexterity": 14,
+        "constitution": 15,
+        "intelligence": 8,
+        "wisdom": 10,
+        "charisma": 17,
+        "proficiencies": [
+          {
+            "value": 2,
+            "proficiency": {
+              "index": "skill-insight",
+              "name": "Skill: Insight"
+            }
+          },
+          {
+            "value": 2,
+            "proficiency": {
+              "index": "skill-perception",
+              "name": "Skill: Perception"
+            }
+          },
+          {
+            "value": 4,
+            "proficiency": {
+              "index": "skill-stealth",
+              "name": "Skill: Stealth"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [
+          "psychic",
+          "bludgeoning",
+          "piercing",
+          "slashing from nonmagical attacks"
+        ],
+        "damage_immunities": [],
+        "condition_immunities": [
+          "exhaustion",
+          "frightened",
+          "grappled",
+          "paralyzed",
+          "petrified",
+          "prone",
+          "restrained",
+          "unconscious"
+        ],
+        "senses": {
+          "darkvision": "60 ft.",
+          "passive_perception": 12
+        },
+        "languages": "understands all languages but can’t speak, telepathy 60 ft.",
+        "challenge_rating": 4,
+        "proficiency_bonus": 2,
+        "xp": 1100,
+        "special_abilities": [
+          {
+            "name": "Amorphous",
+            "desc": "The anguisher can move through a space as narrow as 1 inch wide without squeezing."
+          },
+          {
+            "name": "Continued Suffering",
+            "desc": "A creature that has an Intelligence score of 4 or higher and dies from an anguisher’s attacks spawns a new anguisher in 3 days. Any effect that prevents the body from becoming undead also prevents the emergence of the new anguisher."
+          },
+          {
+            "name": "Frightening Advantage",
+            "desc": "The anguisher has advantage on attack rolls against creatures that are frightened. Against such targets, the anguisher scores a critical hit on a roll of 18 to 20."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The anguisher uses anguish twice.",
+            "attack_bonus": 5,
+            "damage": []
+          },
+          {
+            "name": "Anguish",
+            "desc": "Melee or Ranged Spell Attack: +5 to hit, reach 5 ft. or range 60 ft., one creature. Hit: 13 (3d6 + 3) psychic damage, and the target is frightened of the anguisher and must use its reaction to move its speed away by the safest possible route. Movement used during this reaction can’t be used during the target’s turn.",
+            "attack_bonus": 5,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "psychic",
+                  "name": "Psychic"
+                },
+                "damage_dice": "3d6+3"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Harrow (Recharge 6)",
+            "desc": "Each creature of the anguisher’s choice within 60 feet and aware of the anguisher must make a DC 13 Wisdom saving throw. On a failure, a creature takes 17 (5d6) psychic damage and becomes frightened for 1 minute. If the save succeeds, the creature takes half the damage and isn’t frightened. A frightened creature can repeat the saving throw at the end of each of its turns, ending the condition on itself on a success.",
+            "attack_bonus": 0,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "psychic",
+                  "name": "Psychic"
+                },
+                "damage_dice": "5d6"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Invisibility",
+            "desc": "The anguisher magically turns invisible until it attacks or until its concentration ends (as if concentrating on a spell)."
+          }
+        ]
+      },
+      "animated_flame_tongue": {
+        "index": "animated-flame-tongue",
+        "name": "Animated Flame Tongue",
+        "desc": "\"Sometimes the fiery weaponry of a hero or villain takes on a life of its own, burning all that it touches.\"\n\nFlame Tongue Awakening. The intense magic that powers a flame tongue sword can sometimes cause the weapon to become sentient. These animated weapons seek to fulfill their wielders’ desire to burn and destroy.\n\nLiving Weapon. These swords are self-aware, driven by a burning passion for destruction. They will continue to seek out targets to burn, even if their wielder has fallen.",
+        "salvage": "A defeated animated flame tongue can be reforged into a standard flame tongue with a successful DC 15 Intelligence (Smith’s tools) check.",
+        "lore": [
+          "DC 10 Intelligence (Arcana): Flame tongues are magical swords that can be created by powerful enchanters.",
+          "DC 15 Intelligence (History): Animated flame tongues often arise from weapons used in great battles where the heat of conflict was intense."
+        ],
+        "size": "Medium",
+        "type": "construct",
+        "alignment": "neutral",
+        "armor_class": [
+          {
+            "type": "natural",
+            "value": 15
+          }
+        ],
+        "hit_points": 45,
+        "hit_dice": "6d8",
+        "hit_points_roll": "6d8+18",
+        "speed": {
+          "fly": "40 ft. (hover)"
+        },
+        "strength": 14,
+        "dexterity": 16,
+        "constitution": 16,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10,
+        "proficiencies": [
+          {
+            "value": 5,
+            "proficiency": {
+              "index": "saving-throw-dex",
+              "name": "Saving Throw: DEX"
+            }
+          },
+          {
+            "value": 5,
+            "proficiency": {
+              "index": "saving-throw-con",
+              "name": "Saving Throw: CON"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [
+          "bludgeoning",
+          "piercing",
+          "slashing from nonmagical attacks"
+        ],
+        "damage_immunities": [
+          "fire",
+          "poison"
+        ],
+        "condition_immunities": [
+          "blinded",
+          "charmed",
+          "deafened",
+          "exhaustion",
+          "frightened",
+          "paralyzed",
+          "petrified",
+          "poisoned"
+        ],
+        "senses": {
+          "blindsight": "60 ft.",
+          "passive_perception": 10
+        },
+        "languages": "",
+        "challenge_rating": 3,
+        "proficiency_bonus": 2,
+        "xp": 700,
+        "special_abilities": [
+          {
+            "name": "Flaming Body",
+            "desc": "A creature that touches the animated flame tongue or hits it with a melee attack while within 5 feet of it takes 5 (1d10) fire damage."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The animated flame tongue makes two attacks with its fiery blade.",
+            "attack_bonus": 6,
+            "damage": []
+          },
+          {
+            "name": "Fiery Blade",
+            "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage plus 7 (2d6) fire damage.",
+            "attack_bonus": 6,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "slashing",
+                  "name": "Slashing"
+                },
+                "damage_dice": "1d8+3"
+              },
+              {
+                "damage_type": {
+                  "index": "fire",
+                  "name": "Fire"
+                },
+                "damage_dice": "2d6"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": []
+      },
+      "apparmarole": {
+        "index": "apparmarole",
+        "name": "Apparmarole",
+        "desc": "\"These floating, ghostly guardians are created to protect sacred places and hidden treasures.\"\n\nEthereal Guardians. Apparmaroles are spectral beings summoned to guard places of power or importance. They are bound to the area they protect and will fight to the death to fulfill their duty.\n\nBound Servants. These beings are created through powerful rituals that bind a soul to eternal guardianship. They are tireless and vigilant, always watching for intruders.",
+        "salvage": "The ectoplasm of an apparmarole can be used in place of ghost ichor in potion recipes or other alchemical processes.",
+        "lore": [
+          "DC 10 Intelligence (Arcana): Apparmaroles are created through binding rituals involving ghostly spirits.",
+          "DC 15 Intelligence (Religion): These spectral guardians are often found in ancient temples or tombs, bound to protect the sanctity of the place."
+        ],
+        "size": "Medium",
+        "type": "undead",
+        "alignment": "lawful neutral",
+        "armor_class": [
+          {
+            "type": "natural",
+            "value": 12
+          }
+        ],
+        "hit_points": 75,
+        "hit_dice": "10d8",
+        "hit_points_roll": "10d8+30",
+        "speed": {
+          "fly": "40 ft. (hover)"
+        },
+        "strength": 10,
+        "dexterity": 14,
+        "constitution": 16,
+        "intelligence": 12,
+        "wisdom": 14,
+        "charisma": 18,
+        "proficiencies": [
+          {
+            "value": 5,
+            "proficiency": {
+              "index": "saving-throw-wis",
+              "name": "Saving Throw: WIS"
+            }
+          },
+          {
+            "value": 7,
+            "proficiency": {
+              "index": "saving-throw-cha",
+              "name": "Saving Throw: CHA"
+            }
+          },
+          {
+            "value": 7,
+            "proficiency": {
+              "index": "skill-insight",
+              "name": "Skill: Insight"
+            }
+          },
+          {
+            "value": 7,
+            "proficiency": {
+              "index": "skill-perception",
+              "name": "Skill: Perception"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [
+          "necrotic",
+          "bludgeoning",
+          "piercing",
+          "slashing from nonmagical attacks"
+        ],
+        "damage_immunities": [
+          "cold",
+          "poison"
+        ],
+        "condition_immunities": [
+          "charmed",
+          "exhaustion",
+          "frightened",
+          "grappled",
+          "paralyzed",
+          "petrified",
+          "poisoned",
+          "prone",
+          "restrained",
+          "unconscious"
+        ],
+        "senses": {
+          "darkvision": "60 ft.",
+          "passive_perception": 17
+        },
+        "languages": "Common, the languages it knew in life",
+        "challenge_rating": 4,
+        "proficiency_bonus": 2,
+        "xp": 1100,
+        "special_abilities": [
+          {
+            "name": "Incorporeal Movement",
+            "desc": "The apparmarole can move through other creatures and objects as if they were difficult terrain. It takes 5 (1d10) force damage if it ends its turn inside an object."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Life Drain",
+            "desc": "Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 21 (4d8 + 3) necrotic damage. The target must succeed on a DC 15 Constitution saving throw or its hit point maximum is reduced by an amount equal to the damage taken. This reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.",
+            "attack_bonus": 6,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "necrotic",
+                  "name": "Necrotic"
+                },
+                "damage_dice": "4d8+3"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": []
+      },
+      "tallow toad": {
+        "index": "tallow-toad",
+        "name": "Tallow Toad",
+        "desc": "\"Candles for ritual purposes are often made of strange waxes mixed with rare oils and herbs. Once a ritual is complete, unless ground up or melted down, these candles can transform into toad-like lumps of wax that wield tongues of flame and have an unquenchable desire to burn.\"",
+        "salvage": "A tallow toad leaves behind a lump of warming wax. One lump can be rubbed onto a single small or medium creature’s skin to provide cold resistance for 1 hour.",
+        "lore": [
+          "DC 10 Intelligence (Arcana): Arcane anomalies are constructs immune to poison and being charmed.",
+          "DC 15 Intelligence (Arcana): The tallow toad can spit hot wax that must be removed, or it continues to blister skin. Coming too close to a chalk chatterling can make spellcasting difficult. An inkfester can psychically assault the mind in one form or, in another, surround and consume victims. All these anomalies explode when destroyed.",
+          "DC 20 Intelligence (Arcana): Immersing any arcane anomaly in water hurts it. Wizards frequently scrub their laboratories clean to prevent these beings from emerging."
+        ],
+        "size": "Tiny",
+        "type": "construct",
+        "alignment": "unaligned",
+        "armor_class": [
+          {
+            "type": "natural",
+            "value": 12
+          }
+        ],
+        "hit_points": 17,
+        "hit_dice": "5d4",
+        "hit_points_roll": "5d4+5",
+        "speed": {
+          "walk": "25 ft."
+        },
+        "strength": 8,
+        "dexterity": 14,
+        "constitution": 12,
+        "intelligence": 2,
+        "wisdom": 9,
+        "charisma": 5,
+        "proficiencies": [],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [
+          "cold"
+        ],
+        "damage_immunities": [
+          "poison"
+        ],
+        "condition_immunities": [
+          "charmed",
+          "exhaustion",
+          "poisoned"
+        ],
+        "senses": {
+          "darkvision": "60 ft.",
+          "passive_perception": 9
+        },
+        "languages": "",
+        "challenge_rating": 0.25,
+        "proficiency_bonus": 2,
+        "xp": 50,
+        "special_abilities": [
+          {
+            "name": "Death Burst",
+            "desc": "When the tallow toad dies, it explodes in a shower of hot wax. Each creature within 5 feet of the toad must succeed on a DC 11 Dexterity saving throw or take 3 (1d6) fire damage."
+          },
+          {
+            "name": "Illumination",
+            "desc": "The tallow toad sheds dim light in a 10-foot radius."
+          },
+          {
+            "name": "Water Weakness",
+            "desc": "If the tallow toad is doused in water or ends its turn submerged in water, the toad takes 3 (1d6) acid damage. Maximize this damage if the water is soapy."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Fire Tongue",
+            "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (2d4 + 2) fire damage.",
+            "attack_bonus": 4,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "fire",
+                  "name": "Fire"
+                },
+                "damage_dice": "2d4+2"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Spit",
+            "desc": "Ranged Weapon Attack: +4 to hit, range 20/60 ft., one target. Hit: 7 (2d4 + 2) fire damage. The target takes half the original damage again at the end of its next turn. Any creature can use an action to remove the hot wax, preventing the extra damage.",
+            "attack_bonus": 4,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "fire",
+                  "name": "Fire"
+                },
+                "damage_dice": "2d4+2"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": []
+      },
+      "chalk chatterling": {
+        "index": "chalk-chatterling",
+        "name": "Chalk Chatterling",
+        "desc": "\"Chalk pentagrams and runes must be scrubbed after use, for even faint traces can birth a chalk chatterling, a tiny whirlwind of colored chalk dust that incessantly squeals the sounds its original markings were meant to signify.\"",
+        "salvage": "Dust collected from a chalk chatterling can be incorporated into a ritual spell to halve its casting time. The caster uses some of the magic imbued in the chalk.",
+        "lore": [
+          "DC 10 Intelligence (Arcana): Arcane anomalies are constructs immune to poison and being charmed.",
+          "DC 15 Intelligence (Arcana): The tallow toad can spit hot wax that must be removed, or it continues to blister skin. Coming too close to a chalk chatterling can make spellcasting difficult. An inkfester can psychically assault the mind in one form or, in another, surround and consume victims. All these anomalies explode when destroyed.",
+          "DC 20 Intelligence (Arcana): Immersing any arcane anomaly in water hurts it. Wizards frequently scrub their laboratories clean to prevent these beings from emerging."
+        ],
+        "size": "Small",
+        "type": "construct",
+        "alignment": "unaligned",
+        "armor_class": [
+          {
+            "type": "natural",
+            "value": 12
+          }
+        ],
+        "hit_points": 22,
+        "hit_dice": "5d6",
+        "hit_points_roll": "5d6+5",
+        "speed": {
+          "walk": "25 ft.",
+          "fly": "25 ft."
+        },
+        "strength": 5,
+        "dexterity": 15,
+        "constitution": 12,
+        "intelligence": 4,
+        "wisdom": 10,
+        "charisma": 7,
+        "proficiencies": [],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [
+          "bludgeoning",
+          "piercing",
+          "slashing from nonmagical attacks"
+        ],
+        "damage_immunities": [
+          "poison"
+        ],
+        "condition_immunities": [
+          "charmed",
+          "exhaustion",
+          "poisoned"
+        ],
+        "senses": {
+          "darkvision": "60 ft.",
+          "passive_perception": 10
+        },
+        "languages": "",
+        "challenge_rating": 1,
+        "proficiency_bonus": 2,
+        "xp": 200,
+        "special_abilities": [
+          {
+            "name": "Death Burst",
+            "desc": "When the chalk chatterling dies, it explodes in a burst of chalk dust. Each creature within 5 feet of the chatterling must succeed on a DC 12 Dexterity saving throw or take 4 (1d8) bludgeoning damage."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Chalk Dust",
+            "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 7 (1d6 + 2) bludgeoning damage.",
+            "attack_bonus": 4,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "bludgeoning",
+                  "name": "Bludgeoning"
+                },
+                "damage_dice": "1d6+2"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": []
+      },
+      "inkfester": {
+        "index": "inkfester",
+        "name": "Inkfester",
+        "desc": "\"Woe to any wizard who fails to pay attention to the expiration of their magical inks. If left untreated, old ink coalesces into bizarre two-dimensional creatures that masquerade as graffiti and psychically hurt victims through disturbing glyphs and imagery. These creatures can detach from walls, transforming into clouds of liquid ink to dissolve and drown unwary victims.\"",
+        "salvage": "The residue an inkfester leaves behind can be turned into a tarry liquid that mimics the effect of a darkness spell but requires no concentration. The brewer of this substance must have proficiency with alchemist’s supplies and succeed on a DC 15 Intelligence check with 1 hour of brewing. Success produces a vial of the tar, which activates upon exposure to air. Failure by 5 or more causes an effect mimicking an inkfester’s death burst ability.",
+        "lore": [
+          "DC 10 Intelligence (Arcana): Arcane anomalies are constructs immune to poison and being charmed.",
+          "DC 15 Intelligence (Arcana): The tallow toad can spit hot wax that must be removed, or it continues to blister skin. Coming too close to a chalk chatterling can make spellcasting difficult. An inkfester can psychically assault the mind in one form or, in another, surround and consume victims. All these anomalies explode when destroyed.",
+          "DC 20 Intelligence (Arcana): Immersing any arcane anomaly in water hurts it. Wizards frequently scrub their laboratories clean to prevent these beings from emerging."
+        ],
+        "size": "Medium",
+        "type": "construct",
+        "alignment": "unaligned",
+        "armor_class": [
+          {
+            "type": "natural",
+            "value": 12
+          }
+        ],
+        "hit_points": 39,
+        "hit_dice": "6d8",
+        "hit_points_roll": "6d8+12",
+        "speed": {
+          "walk": "30 ft.",
+          "fly": "30 ft. (hover)"
+        },
+        "strength": 10,
+        "dexterity": 14,
+        "constitution": 14,
+        "intelligence": 10,
+        "wisdom": 12,
+        "charisma": 16,
+        "proficiencies": [],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [
+          "bludgeoning",
+          "piercing",
+          "slashing from nonmagical attacks"
+        ],
+        "damage_immunities": [
+          "poison"
+        ],
+        "condition_immunities": [
+          "charmed",
+          "exhaustion",
+          "poisoned"
+        ],
+        "senses": {
+          "darkvision": "60 ft.",
+          "passive_perception": 11
+        },
+        "languages": "",
+        "challenge_rating": 2,
+        "proficiency_bonus": 2,
+        "xp": 450,
+        "special_abilities": [
+          {
+            "name": "Death Burst",
+            "desc": "When the inkfester dies, it explodes in a burst of ink. Each creature within 5 feet of the inkfester must succeed on a DC 13 Dexterity saving throw or take 7 (2d6) acid damage."
+          },
+          {
+            "name": "Dark Ink",
+            "desc": "The inkfester can use its dark ink to create an area of magical darkness in a 10-foot radius. The darkness lasts for 1 minute or until the inkfester dismisses it as a bonus action."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Ink Lash",
+            "desc": "Melee Weapon Attack: +4 to hit, reach 10 ft., one target. Hit: 9 (2d6 + 2) acid damage.",
+            "attack_bonus": 4,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "acid",
+                  "name": "Acid"
+                },
+                "damage_dice": "2d6+2"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Psychic Scream",
+            "desc": "The inkfester releases a scream that psychically assaults the minds of nearby creatures. Each creature within 30 feet of the inkfester that can hear it must succeed on a DC 13 Wisdom saving throw or take 14 (4d6) psychic damage and be frightened until the end of its next turn.",
+            "attack_bonus": 0,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "psychic",
+                  "name": "Psychic"
+                },
+                "damage_dice": "4d6"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": []
+      },
+      "inquisito_hunter": {
+        "index": "inquisitor-hunter",
+        "name": "Inquisitor Hunter",
+        "desc": "\"The joy common folk feel seeing a detachment of inquisitors pass by is matched only by the terror corrupt mages feel.\"\n\nRadical Measures. The Arcanist Inquisition exists to detain and destroy arcane spellcasters. Inquisitors believe that arcane magic is inherently corrupting and that even the best-intentioned spellcaster can succumb to dangerous behavior and moral ruin. At first, the inquisition’s masters sought to monitor spellcasters, with detainment reserved for those who abused their magical gifts. Over time, the ideology became more hardline. Now, inquisitors put spellcasters whom they don’t imprison indefinitely to the fire.\n\nInquisitors train to discover mages, but they don’t rely only on their acumen. Folks fearful of being accused are happy to point a finger at a suspicious neighbor if doing so focuses the inquisition’s interest elsewhere.\n\nDogma Bound. The Arcanist Inquisition is known for its ongoing efforts to eradicate arcane magic and its practitioners. However, it also investigates other crimes against the edicts of the Arch Seraphs. Inquisitors carry a book of dogma derived from the words of Empyreus as spoken to Sagrado Valieda, the Inquisition’s founder. The book identifies moral crimes that call for punishments, ranging from public humiliation to death. Initiates apply a strict and literal reading to the crimes and consequences detailed within the book. High-ranking inquisitors have more leeway in how they choose to interpret the edicts. Inquisitors claim that if they set an innocent afire, Empyreus would douse the flames. That he has never done so is proof, adherents say, that no one has been wrongfully condemned.",
+        "salvage": "Inquisitors carry fine armaments and religious trappings. Seraph iconography is common, as is holy water. Some members carry trinkets of religious significance such as angel feathers or silver boxes holding the ashes of martyrs. Some carry magical arms and armor, such as armor of resistance and vicious weapons. Traveling inquisitors carry the book of Arcanist Inquisition dogma.",
+        "lore": [
+          "DC 10 Intelligence (Religion): The founder of the Arcanist Inquisition claims that the Arch Seraph Empyreus said that magic is dangerous, corrupt, and corrupting. People of the Castinellan Provinces hold this belief to be true, and the sentiment has spread beyond that region.",
+          "DC 15 Intelligence (History): Any suspected arcanist or associate of a suspected mage who publicly declares allegiance to Empyreus and confesses to crimes against the divine order can request judgment from a speaker for the Arch Seraph. If they do so, inquisitors are obligated to take the individual to the Cathedral of Embers for trial rather than passing judgment and meting out punishment as they normally would.",
+          "DC 15 Intelligence (Arcana): The Cathedral of Embers, headquarters of the Arcanist Inquisition, is a well-known prison for suspected arcanists awaiting trial or serving a sentence. Less known is that the complex also contains an enormous collection of magic items, kept locked away. The inquisition is concerned as much with keeping the items safe as sequestering their potential influence.",
+          "DC 20 Intelligence (Religion): Trained to root out secrets, some inquisitors have special blessings that allow them to pierce illusions and uncover deceit. Their devotion leads them to pursue their foes despite personal risk, making them difficult to evade."
+        ],
+        "size": "Medium",
+        "type": "humanoid",
+        "alignment": "any",
+        "armor_class": [
+          {
+            "type": "chain shirt",
+            "value": 15
+          }
+        ],
+        "hit_points": 26,
+        "hit_dice": "4d8",
+        "hit_points_roll": "4d8+8",
+        "speed": {
+          "walk": "30 ft."
+        },
+        "strength": 13,
+        "dexterity": 15,
+        "constitution": 14,
+        "intelligence": 12,
+        "wisdom": 13,
+        "charisma": 10,
+        "proficiencies": [
+          {
+            "value": 3,
+            "proficiency": {
+              "index": "skill-investigation",
+              "name": "Skill: Investigation"
+            }
+          },
+          {
+            "value": 3,
+            "proficiency": {
+              "index": "skill-perception",
+              "name": "Skill: Perception"
+            }
+          },
+          {
+            "value": 3,
+            "proficiency": {
+              "index": "skill-religion",
+              "name": "Skill: Religion"
+            }
+          },
+          {
+            "value": 3,
+            "proficiency": {
+              "index": "skill-survival",
+              "name": "Skill: Survival"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [],
+        "damage_immunities": [],
+        "condition_immunities": [],
+        "senses": {
+          "passive_perception": 13
+        },
+        "languages": "any two languages",
+        "challenge_rating": 1,
+        "proficiency_bonus": 2,
+        "xp": 200,
+        "special_abilities": [
+          {
+            "name": "Inquisitor’s Awareness",
+            "desc": "The inquisitor hunter can expend a 1st-level ranger spell slot to sense for 1 minute whether arcane or innate spellcasters, aberrations, fey, and fiends are within 1 mile. This trait doesn’t reveal the creatures’ locations or numbers."
+          },
+          {
+            "name": "Spellcasting",
+            "desc": "The inquisitor hunter is a 3rd-level spellcaster. Its spellcasting ability is Wisdom. The hunter knows the following ranger spells: 1st level (3 slots): detect magic, hunter’s mark, protection from evil and good"
+          }
+        ],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The inquisitor hunter makes two shortsword attacks, provided it has a shortsword in each hand.",
+            "attack_bonus": 4,
+            "damage": []
+          },
+          {
+            "name": "Shortsword",
+            "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) piercing damage and 2 (1d4) psychic damage, or 5 (2d4) psychic damage if the target is concentrating on a spell.",
+            "attack_bonus": 4,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "piercing",
+                  "name": "Piercing"
+                },
+                "damage_dice": "1d6+2"
+              },
+              {
+                "damage_type": {
+                  "index": "psychic",
+                  "name": "Psychic"
+                },
+                "damage_dice": "1d4"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Longbow",
+            "desc": "Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target. Hit: 6 (1d8 + 2) piercing damage and 2 (1d4) psychic damage, or 5 (2d4) psychic damage if the target is concentrating on a spell.",
+            "attack_bonus": 4,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "piercing",
+                  "name": "Piercing"
+                },
+                "damage_dice": "1d8+2"
+              },
+              {
+                "damage_type": {
+                  "index": "psychic",
+                  "name": "Psychic"
+                },
+                "damage_dice": "1d4"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": []
+      },
+      "inquisitor_knight": {
+        "index": "inquisitor-knight",
+        "name": "Inquisitor Knight",
+        "desc": "\"The joy common folk feel seeing a detachment of inquisitors pass by is matched only by the terror corrupt mages feel.\"\n\nRadical Measures. The Arcanist Inquisition exists to detain and destroy arcane spellcasters. Inquisitors believe that arcane magic is inherently corrupting and that even the best-intentioned spellcaster can succumb to dangerous behavior and moral ruin. At first, the inquisition’s masters sought to monitor spellcasters, with detainment reserved for those who abused their magical gifts. Over time, the ideology became more hardline. Now, inquisitors put spellcasters whom they don’t imprison indefinitely to the fire.\n\nInquisitors train to discover mages, but they don’t rely only on their acumen. Folks fearful of being accused are happy to point a finger at a suspicious neighbor if doing so focuses the inquisition’s interest elsewhere.\n\nDogma Bound. The Arcanist Inquisition is known for its ongoing efforts to eradicate arcane magic and its practitioners. However, it also investigates other crimes against the edicts of the Arch Seraphs. Inquisitors carry a book of dogma derived from the words of Empyreus as spoken to Sagrado Valieda, the Inquisition’s founder. The book identifies moral crimes that call for punishments, ranging from public humiliation to death. Initiates apply a strict and literal reading to the crimes and consequences detailed within the book. High-ranking inquisitors have more leeway in how they choose to interpret the edicts. Inquisitors claim that if they set an innocent afire, Empyreus would douse the flames. That he has never done so is proof, adherents say, that no one has been wrongfully condemned.",
+        "salvage": "Inquisitors carry fine armaments and religious trappings. Seraph iconography is common, as is holy water. Some members carry trinkets of religious significance such as angel feathers or silver boxes holding the ashes of martyrs. Some carry magical arms and armor, such as armor of resistance and vicious weapons. Traveling inquisitors carry the book of Arcanist Inquisition dogma.",
+        "lore": [
+          "DC 10 Intelligence (Religion): The founder of the Arcanist Inquisition claims that the Arch Seraph Empyreus said that magic is dangerous, corrupt, and corrupting. People of the Castinellan Provinces hold this belief to be true, and the sentiment has spread beyond that region.",
+          "DC 15 Intelligence (History): Any suspected arcanist or associate of a suspected mage who publicly declares allegiance to Empyreus and confesses to crimes against the divine order can request judgment from a speaker for the Arch Seraph. If they do so, inquisitors are obligated to take the individual to the Cathedral of Embers for trial rather than passing judgment and meting out punishment as they normally would.",
+          "DC 15 Intelligence (Arcana): The Cathedral of Embers, headquarters of the Arcanist Inquisition, is a well-known prison for suspected arcanists awaiting trial or serving a sentence. Less known is that the complex also contains an enormous collection of magic items, kept locked away. The inquisition is concerned as much with keeping the items safe as sequestering their potential influence.",
+          "DC 20 Intelligence (Religion): Trained to root out secrets, some inquisitors have special blessings that allow them to pierce illusions and uncover deceit. Their devotion leads them to pursue their foes despite personal risk, making them difficult to evade."
+        ],
+        "size": "Medium",
+        "type": "humanoid",
+        "alignment": "any",
+        "armor_class": [
+          {
+            "type": "chain mail",
+            "value": 18,
+            "equipment": "shield"
+          }
+        ],
+        "hit_points": 65,
+        "hit_dice": "10d8",
+        "hit_points_roll": "10d8+20",
+        "speed": {
+          "walk": "30 ft."
+        },
+        "strength": 16,
+        "dexterity": 11,
+        "constitution": 14,
+        "intelligence": 12,
+        "wisdom": 15,
+        "charisma": 13,
+        "proficiencies": [
+          {
+            "value": 4,
+            "proficiency": {
+              "index": "skill-insight",
+              "name": "Skill: Insight"
+            }
+          },
+          {
+            "value": 3,
+            "proficiency": {
+              "index": "skill-investigation",
+              "name": "Skill: Investigation"
+            }
+          },
+          {
+            "value": 4,
+            "proficiency": {
+              "index": "skill-perception",
+              "name": "Skill: Perception"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [],
+        "damage_immunities": [],
+        "condition_immunities": [],
+        "senses": {
+          "passive_perception": 14
+        },
+        "languages": "any two languages",
+        "challenge_rating": 3,
+        "proficiency_bonus": 2,
+        "xp": 700,
+        "special_abilities": [
+          {
+            "name": "Brave",
+            "desc": "The inquisitor knight has advantage on saving throws against being frightened."
+          },
+          {
+            "name": "Discerning",
+            "desc": "The inquisitor knight has advantage on saving throws against illusions."
+          },
+          {
+            "name": "Mark",
+            "desc": "When the inquisitor knight hits a creature with a melee weapon attack, the knight marks that creature until the end of the knight’s next turn. The mark ends early if the knight becomes incapacitated or dies, or someone else marks the same creature. While the marked creature is within the knight’s reach, it has disadvantage on attack rolls against creatures other than the knight."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The inquisitor knight makes two attacks.",
+            "attack_bonus": 5,
+            "damage": []
+          },
+          {
+            "name": "Longsword",
+            "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 7 (1d8 + 3) slashing damage, or 8 (1d10 + 3) slashing damage if used with two hands to make a melee attack, and Mark.",
+            "attack_bonus": 5,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "slashing",
+                  "name": "Slashing"
+                },
+                "damage_dice": "1d8+3"
+              },
+              {
+                "damage_type": {
+                  "index": "slashing",
+                  "name": "Slashing"
+                },
+                "damage_dice": "1d10+3"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Javelin",
+            "desc": "Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 30/120 ft., one target. Hit: 6 (1d6 + 3) piercing damage and, if used to make a melee attack, and Mark.",
+            "attack_bonus": 5,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "piercing",
+                  "name": "Piercing"
+                },
+                "damage_dice": "1d6+3"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "reactions": [
+          {
+            "name": "Marked Control",
+            "desc": "If a creature subjected to the inquisitor knight’s Mark moves while within 5 feet of the knight, the knight can make a melee attack against that creature. On a hit, the creature’s speed drops to 0 until the end of their current turn."
+          }
+        ],
+        "legendary_actions": []
+      },
+      "inquisitor_priest": {
+        "index": "inquisitor-priest",
+        "name": "Inquisitor Priest",
+        "desc": "\"The joy common folk feel seeing a detachment of inquisitors pass by is matched only by the terror corrupt mages feel.\"\n\nRadical Measures. The Arcanist Inquisition exists to detain and destroy arcane spellcasters. Inquisitors believe that arcane magic is inherently corrupting and that even the best-intentioned spellcaster can succumb to dangerous behavior and moral ruin. At first, the inquisition’s masters sought to monitor spellcasters, with detainment reserved for those who abused their magical gifts. Over time, the ideology became more hardline. Now, inquisitors put spellcasters whom they don’t imprison indefinitely to the fire.\n\nInquisitors train to discover mages, but they don’t rely only on their acumen. Folks fearful of being accused are happy to point a finger at a suspicious neighbor if doing so focuses the inquisition’s interest elsewhere.\n\nDogma Bound. The Arcanist Inquisition is known for its ongoing efforts to eradicate arcane magic and its practitioners. However, it also investigates other crimes against the edicts of the Arch Seraphs. Inquisitors carry a book of dogma derived from the words of Empyreus as spoken to Sagrado Valieda, the Inquisition’s founder. The book identifies moral crimes that call for punishments, ranging from public humiliation to death. Initiates apply a strict and literal reading to the crimes and consequences detailed within the book. High-ranking inquisitors have more leeway in how they choose to interpret the edicts. Inquisitors claim that if they set an innocent afire, Empyreus would douse the flames. That he has never done so is proof, adherents say, that no one has been wrongfully condemned.",
+        "salvage": "Inquisitors carry fine armaments and religious trappings. Seraph iconography is common, as is holy water. Some members carry trinkets of religious significance such as angel feathers or silver boxes holding the ashes of martyrs. Some carry magical arms and armor, such as armor of resistance and vicious weapons. Traveling inquisitors carry the book of Arcanist Inquisition dogma.",
+        "lore": [
+          "DC 10 Intelligence (Religion): The founder of the Arcanist Inquisition claims that the Arch Seraph Empyreus said that magic is dangerous, corrupt, and corrupting. People of the Castinellan Provinces hold this belief to be true, and the sentiment has spread beyond that region.",
+          "DC 15 Intelligence (History): Any suspected arcanist or associate of a suspected mage who publicly declares allegiance to Empyreus and confesses to crimes against the divine order can request judgment from a speaker for the Arch Seraph. If they do so, inquisitors are obligated to take the individual to the Cathedral of Embers for trial rather than passing judgment and meting out punishment as they normally would.",
+          "DC 15 Intelligence (Arcana): The Cathedral of Embers, headquarters of the Arcanist Inquisition, is a well-known prison for suspected arcanists awaiting trial or serving a sentence. Less known is that the complex also contains an enormous collection of magic items, kept locked away. The inquisition is concerned as much with keeping the items safe as sequestering their potential influence.",
+          "DC 20 Intelligence (Religion): Trained to root out secrets, some inquisitors have special blessings that allow them to pierce illusions and uncover deceit. Their devotion leads them to pursue their foes despite personal risk, making them difficult to evade."
+        ],
+        "size": "Medium",
+        "type": "humanoid",
+        "alignment": "any",
+        "armor_class": [
+          {
+            "type": "ring mail",
+            "value": 16,
+            "equipment": "shield"
+          }
+        ],
+        "hit_points": 39,
+        "hit_dice": "6d8",
+        "hit_points_roll": "6d8+12",
+        "speed": {
+          "walk": "30 ft."
+        },
+        "strength": 12,
+        "dexterity": 11,
+        "constitution": 14,
+        "intelligence": 13,
+        "wisdom": 16,
+        "charisma": 12,
+        "proficiencies": [],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [],
+        "damage_immunities": [],
+        "condition_immunities": [],
+        "senses": {
+          "passive_perception": 13
+        },
+        "languages": "any two languages",
+        "challenge_rating": 2,
+        "proficiency_bonus": 2,
+        "xp": 450,
+        "special_abilities": [],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The inquisitor priest makes two melee attacks.",
+            "attack_bonus": 4,
+            "damage": []
+          },
+          {
+            "name": "Mace",
+            "desc": "Melee Weapon Attack: +4 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 2) bludgeoning damage.",
+            "attack_bonus": 4,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "bludgeoning",
+                  "name": "Bludgeoning"
+                },
+                "damage_dice": "1d6+2"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": []
+      },
+      "inquisitor_warrior": {
+        "index": "inquisitor-warrior",
+        "name": "Inquisitor Warrior",
+        "desc": "\"The joy common folk feel seeing a detachment of inquisitors pass by is matched only by the terror corrupt mages feel.\"\n\nRadical Measures. The Arcanist Inquisition exists to detain and destroy arcane spellcasters. Inquisitors believe that arcane magic is inherently corrupting and that even the best-intentioned spellcaster can succumb to dangerous behavior and moral ruin. At first, the inquisition’s masters sought to monitor spellcasters, with detainment reserved for those who abused their magical gifts. Over time, the ideology became more hardline. Now, inquisitors put spellcasters whom they don’t imprison indefinitely to the fire.\n\nInquisitors train to discover mages, but they don’t rely only on their acumen. Folks fearful of being accused are happy to point a finger at a suspicious neighbor if doing so focuses the inquisition’s interest elsewhere.\n\nDogma Bound. The Arcanist Inquisition is known for its ongoing efforts to eradicate arcane magic and its practitioners. However, it also investigates other crimes against the edicts of the Arch Seraphs. Inquisitors carry a book of dogma derived from the words of Empyreus as spoken to Sagrado Valieda, the Inquisition’s founder. The book identifies moral crimes that call for punishments, ranging from public humiliation to death. Initiates apply a strict and literal reading to the crimes and consequences detailed within the book. High-ranking inquisitors have more leeway in how they choose to interpret the edicts. Inquisitors claim that if they set an innocent afire, Empyreus would douse the flames. That he has never done so is proof, adherents say, that no one has been wrongfully condemned.",
+        "salvage": "Inquisitors carry fine armaments and religious trappings. Seraph iconography is common, as is holy water. Some members carry trinkets of religious significance such as angel feathers or silver boxes holding the ashes of martyrs. Some carry magical arms and armor, such as armor of resistance and vicious weapons. Traveling inquisitors carry the book of Arcanist Inquisition dogma.",
+        "lore": [
+          "DC 10 Intelligence (Religion): The founder of the Arcanist Inquisition claims that the Arch Seraph Empyreus said that magic is dangerous, corrupt, and corrupting. People of the Castinellan Provinces hold this belief to be true, and the sentiment has spread beyond that region.",
+          "DC 15 Intelligence (History): Any suspected arcanist or associate of a suspected mage who publicly declares allegiance to Empyreus and confesses to crimes against the divine order can request judgment from a speaker for the Arch Seraph. If they do so, inquisitors are obligated to take the individual to the Cathedral of Embers for trial rather than passing judgment and meting out punishment as they normally would.",
+          "DC 15 Intelligence (Arcana): The Cathedral of Embers, headquarters of the Arcanist Inquisition, is a well-known prison for suspected arcanists awaiting trial or serving a sentence. Less known is that the complex also contains an enormous collection of magic items, kept locked away. The inquisition is concerned as much with keeping the items safe as sequestering their potential influence.",
+          "DC 20 Intelligence (Religion): Trained to root out secrets, some inquisitors have special blessings that allow them to pierce illusions and uncover deceit. Their devotion leads them to pursue their foes despite personal risk, making them difficult to evade."
+        ],
+        "size": "Medium",
+        "type": "humanoid",
+        "alignment": "any",
+        "armor_class": [
+          {
+            "type": "half plate",
+            "value": 17
+          }
+        ],
+        "hit_points": 45,
+        "hit_dice": "6d8",
+        "hit_points_roll": "6d8+18",
+        "speed": {
+          "walk": "30 ft."
+        },
+        "strength": 16,
+        "dexterity": 12,
+        "constitution": 14,
+        "intelligence": 10,
+        "wisdom": 13,
+        "charisma": 11,
+        "proficiencies": [
+          {
+            "value": 3,
+            "proficiency": {
+              "index": "skill-athletics",
+              "name": "Skill: Athletics"
+            }
+          },
+          {
+            "value": 4,
+            "proficiency": {
+              "index": "skill-insight",
+              "name": "Skill: Insight"
+            }
+          },
+          {
+            "value": 4,
+            "proficiency": {
+              "index": "skill-intimidation",
+              "name": "Skill: Intimidation"
+            }
+          },
+          {
+            "value": 3,
+            "proficiency": {
+              "index": "skill-perception",
+              "name": "Skill: Perception"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [],
+        "damage_immunities": [],
+        "condition_immunities": [],
+        "senses": {
+          "passive_perception": 13
+        },
+        "languages": "any two languages",
+        "challenge_rating": 3,
+        "proficiency_bonus": 2,
+        "xp": 700,
+        "special_abilities": [
+          {
+            "name": "Brave",
+            "desc": "The inquisitor warrior has advantage on saving throws against being frightened."
+          },
+          {
+            "name": "Divine Sense",
+            "desc": "The inquisitor warrior can use an action to open their awareness to detect celestial, fiendish, or undead presences."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The inquisitor warrior makes two attacks.",
+            "attack_bonus": 5,
+            "damage": []
+          },
+          {
+            "name": "Longsword",
+            "desc": "Melee Weapon Attack: +5 to hit, reach 5 ft., one target. Hit: 8 (1d8 + 4) slashing damage, or 9 (1d10 + 4) slashing damage if used with two hands to make a melee attack.",
+            "attack_bonus": 5,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "slashing",
+                  "name": "Slashing"
+                },
+                "damage_dice": "1d8+4"
+              },
+              {
+                "damage_type": {
+                  "index": "slashing",
+                  "name": "Slashing"
+                },
+                "damage_dice": "1d10+4"
+              }
+            ],
+            "actions": []
+          },
+          {
+            "name": "Heavy Crossbow",
+            "desc": "Ranged Weapon Attack: +4 to hit, range 100/400 ft., one target. Hit: 7 (1d10 + 2) piercing damage.",
+            "attack_bonus": 4,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "piercing",
+                  "name": "Piercing"
+                },
+                "damage_dice": "1d10+2"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": []
+      },
+      "inquisitor_judge": {
+        "index": "inquisitor-judge",
+        "name": "Inquisitor Judge",
+        "desc": "\"The joy common folk feel seeing a detachment of inquisitors pass by is matched only by the terror corrupt mages feel.\"\n\nRadical Measures. The Arcanist Inquisition exists to detain and destroy arcane spellcasters. Inquisitors believe that arcane magic is inherently corrupting and that even the best-intentioned spellcaster can succumb to dangerous behavior and moral ruin. At first, the inquisition’s masters sought to monitor spellcasters, with detainment reserved for those who abused their magical gifts. Over time, the ideology became more hardline. Now, inquisitors put spellcasters whom they don’t imprison indefinitely to the fire.\n\nInquisitors train to discover mages, but they don’t rely only on their acumen. Folks fearful of being accused are happy to point a finger at a suspicious neighbor if doing so focuses the inquisition’s interest elsewhere.\n\nDogma Bound. The Arcanist Inquisition is known for its ongoing efforts to eradicate arcane magic and its practitioners. However, it also investigates other crimes against the edicts of the Arch Seraphs. Inquisitors carry a book of dogma derived from the words of Empyreus as spoken to Sagrado Valieda, the Inquisition’s founder. The book identifies moral crimes that call for punishments, ranging from public humiliation to death. Initiates apply a strict and literal reading to the crimes and consequences detailed within the book. High-ranking inquisitors have more leeway in how they choose to interpret the edicts. Inquisitors claim that if they set an innocent afire, Empyreus would douse the flames. That he has never done so is proof, adherents say, that no one has been wrongfully condemned.",
+        "salvage": "Inquisitors carry fine armaments and religious trappings. Seraph iconography is common, as is holy water. Some members carry trinkets of religious significance such as angel feathers or silver boxes holding the ashes of martyrs. Some carry magical arms and armor, such as armor of resistance and vicious weapons. Traveling inquisitors carry the book of Arcanist Inquisition dogma.",
+        "lore": [
+          "DC 10 Intelligence (Religion): The founder of the Arcanist Inquisition claims that the Arch Seraph Empyreus said that magic is dangerous, corrupt, and corrupting. People of the Castinellan Provinces hold this belief to be true, and the sentiment has spread beyond that region.",
+          "DC 15 Intelligence (History): Any suspected arcanist or associate of a suspected mage who publicly declares allegiance to Empyreus and confesses to crimes against the divine order can request judgment from a speaker for the Arch Seraph. If they do so, inquisitors are obligated to take the individual to the Cathedral of Embers for trial rather than passing judgment and meting out punishment as they normally would.",
+          "DC 15 Intelligence (Arcana): The Cathedral of Embers, headquarters of the Arcanist Inquisition, is a well-known prison for suspected arcanists awaiting trial or serving a sentence. Less known is that the complex also contains an enormous collection of magic items, kept locked away. The inquisition is concerned as much with keeping the items safe as sequestering their potential influence.",
+          "DC 20 Intelligence (Religion): Trained to root out secrets, some inquisitors have special blessings that allow them to pierce illusions and uncover deceit. Their devotion leads them to pursue their foes despite personal risk, making them difficult to evade."
+        ],
+        "size": "Medium",
+        "type": "humanoid",
+        "alignment": "lawful",
+        "armor_class": [
+          {
+            "type": "plate",
+            "value": 18
+          }
+        ],
+        "hit_points": 112,
+        "hit_dice": "15d8",
+        "hit_points_roll": "15d8+45",
+        "speed": {
+          "walk": "30 ft."
+        },
+        "strength": 18,
+        "dexterity": 10,
+        "constitution": 16,
+        "intelligence": 12,
+        "wisdom": 14,
+        "charisma": 16,
+        "proficiencies": [
+          {
+            "value": 6,
+            "proficiency": {
+              "index": "skill-insight",
+              "name": "Skill: Insight"
+            }
+          },
+          {
+            "value": 5,
+            "proficiency": {
+              "index": "skill-investigation",
+              "name": "Skill: Investigation"
+            }
+          },
+          {
+            "value": 6,
+            "proficiency": {
+              "index": "skill-perception",
+              "name": "Skill: Perception"
+            }
+          },
+          {
+            "value": 5,
+            "proficiency": {
+              "index": "skill-religion",
+              "name": "Skill: Religion"
+            }
+          }
+        ],
+        "damage_vulnerabilities": [],
+        "damage_resistances": [],
+        "damage_immunities": [],
+        "condition_immunities": [],
+        "senses": {
+          "passive_perception": 16
+        },
+        "languages": "any two languages",
+        "challenge_rating": 9,
+        "proficiency_bonus": 4,
+        "xp": 5000,
+        "special_abilities": [
+          {
+            "name": "Aura of Clarity",
+            "desc": "While within 10 feet of a conscious inquisitor judge, creatures of the judge’s choice can’t be blinded or frightened, and creatures and objects can be invisible only if the judge allows it."
+          },
+          {
+            "name": "Brand Heretic (Recharges after a Short or Long Rest)",
+            "desc": "As a bonus action, the inquisitor judge chooses one creature the judge can see within 30 feet of it. The judge marks the target as a heretic. For 1 minute, the judge’s weapon attack rolls against the heretic score a critical hit on a roll of 19 or 20. At the start of each of the heretic’s turns, the judge can use a reaction to make one weapon attack against the heretic."
+          },
+          {
+            "name": "Smite",
+            "desc": "When the inquisitor judge hits with a melee weapon attack, it can expend one spell slot to deal extra radiant damage. The extra damage is 9 (2d8) for a 1st-level spell slot, 13 (3d8) for a 2nd-level one, and 18 (4d8) for a 3rd-level slot."
+          },
+          {
+            "name": "Spellcasting",
+            "desc": "The inquisitor judge is a 12th-level spellcaster. Its spellcasting ability is Charisma (spell save DC 14). The judge has the following paladin spells prepared: 1st level (4 slots): detect magic, hunter’s mark, protection from evil and good; 2nd level (3 slots): detect thoughts, lesser restoration; 3rd level (3 slots): dispel magic, remove curse."
+          }
+        ],
+        "actions": [
+          {
+            "name": "Multiattack",
+            "desc": "The judge makes two greatsword attacks.",
+            "attack_bonus": 8,
+            "damage": []
+          },
+          {
+            "name": "Greatsword",
+            "desc": "Melee Weapon Attack: +8 to hit, reach 5 ft., one target. Hit: 11 (2d6 + 4) slashing damage and 4 (1d8) radiant damage.",
+            "attack_bonus": 8,
+            "damage": [
+              {
+                "damage_type": {
+                  "index": "slashing",
+                  "name": "Slashing"
+                },
+                "damage_dice": "2d6+4"
+              },
+              {
+                "damage_type": {
+                  "index": "radiant",
+                  "name": "Radiant"
+                },
+                "damage_dice": "1d8"
+              }
+            ],
+            "actions": []
+          }
+        ],
+        "legendary_actions": []
+      }
+      
+    }
+  }
+]
