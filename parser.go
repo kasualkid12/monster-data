@@ -213,6 +213,15 @@ func parseCreature(data string) (Creature, error) {
 	}
 	creature.Lore = lore
 
+	// Parse size, type, and alignment
+	size, typeClean, alignment, nextIndex, err := parseSizeTypeAlignment(lines, creature.Name, nextIndex)
+	if err != nil {
+		return Creature{}, fmt.Errorf("error parsing size, type, and alignment: %v", err)
+	}
+	creature.Size = size
+	creature.Type = typeClean
+	creature.Alignment = alignment
+
 	return creature, nil
 }
 
@@ -327,4 +336,42 @@ func isNumeric(s string) bool {
 		}
 	}
 	return true
+}
+
+// parseSizeTypeAlignment extracts the size, type, and alignment from the input data
+func parseSizeTypeAlignment(lines []string, creatureName string, startIndex int) (string, string, string, int, error) {
+	creatureNameLower := strings.ToLower(creatureName)
+
+	for i := startIndex; i < len(lines); i++ {
+		line := strings.TrimSpace(lines[i])
+		lineLower := strings.ToLower(line)
+
+		// Look for the next occurrence of the creature's name
+		if lineLower == creatureNameLower {
+			// Ensure there's a next line
+			if i+1 >= len(lines) {
+				return "", "", "", 0, fmt.Errorf("missing size, type, and alignment after creature name")
+			}
+
+			// Parse the next line
+			nextLine := strings.TrimSpace(lines[i+1])
+			words := strings.Fields(nextLine)
+
+			// Validate the format of the line
+			if len(words) < 3 {
+				return "", "", "", 0, fmt.Errorf("invalid format for size, type, and alignment: %q", nextLine)
+			}
+
+			// Extract size, type, and alignment
+			size := words[0]
+			typeRaw := words[1]
+			typeClean := strings.TrimSuffix(typeRaw, ",")
+			alignment := words[len(words)-1]
+
+			return size, typeClean, alignment, i + 1, nil
+		}
+	}
+
+	// If the creature name is not found again, return an error
+	return "", "", "", 0, fmt.Errorf("creature name not found again in input")
 }

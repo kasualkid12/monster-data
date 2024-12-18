@@ -9,9 +9,9 @@
       "DC 15 Intelligence (Arcana): A blazehorn is immune to fire damage.",
       "DC 20 Intelligence (Nature): When wounded, a blazehorn can emit a retaliatory firebomb."
     ],
-    "size": "",
-    "type": "",
-    "alignment": "",
+    "size": "Large",
+    "type": "monstrosity",
+    "alignment": "unaligned",
     "armor_class": null,
     "hit_points": 0,
     "hit_dice": "",
