@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"unicode"
 )
 
 // CreatureCollection represents the entire JSON structure with the creature name as the key
@@ -205,6 +206,13 @@ func parseCreature(data string) (Creature, error) {
 	salvage, nextIndex := parseSalvage(lines, creature.Name, nextIndex)
 	creature.Salvage = salvage
 
+	// Parse lore (optional)
+	lore, nextIndex, err := parseLore(lines, creature.Name, nextIndex)
+	if err != nil {
+		return Creature{}, fmt.Errorf("error parsing lore: %v", err)
+	}
+	creature.Lore = lore
+
 	return creature, nil
 }
 
@@ -255,4 +263,68 @@ func parseSalvage(lines []string, creatureName string, startIndex int) (string, 
 
 	// If no stopping point is found, return the collected salvage and the last index
 	return strings.TrimSpace(strings.Join(salvage, " ")), len(lines)
+}
+
+// parseLore extracts the lore section from the input data
+func parseLore(lines []string, creatureName string, startIndex int) ([]string, int, error) {
+	lore := []string{}
+	creatureNameLower := strings.ToLower(creatureName)
+	var currentLore string
+
+	for i := startIndex; i < len(lines); i++ {
+		line := strings.TrimSpace(lines[i])
+		lineLower := strings.ToLower(line)
+
+		// Stop if the line is a stopping point
+		if lineLower == creatureNameLower {
+			// Append the last accumulated lore entry if present
+			if currentLore != "" {
+				lore = append(lore, strings.TrimSpace(currentLore))
+			}
+			return lore, i, nil
+		}
+
+		// Skip the line containing the word "lore"
+		if lineLower == "lore" {
+			continue
+		}
+
+		// Check if the line starts with "DC X" (where X is a number)
+		if strings.HasPrefix(line, "DC") {
+			words := strings.Fields(line)
+			if len(words) < 2 || !isNumeric(words[1]) {
+				return nil, i, fmt.Errorf("invalid format in lore line: %q", line)
+			}
+
+			// If there's an ongoing lore entry, finalize and append it
+			if currentLore != "" {
+				lore = append(lore, strings.TrimSpace(currentLore))
+			}
+
+			// Start a new lore entry
+			currentLore = line
+		} else {
+			// Continuation of the current lore entry
+			if currentLore != "" {
+				currentLore += " " + line
+			}
+		}
+	}
+
+	// Append the last accumulated lore entry if present
+	if currentLore != "" {
+		lore = append(lore, strings.TrimSpace(currentLore))
+	}
+
+	return lore, len(lines), nil
+}
+
+// isNumeric checks if a string is a valid number
+func isNumeric(s string) bool {
+	for _, r := range s {
+		if !unicode.IsDigit(r) {
+			return false
+		}
+	}
+	return true
 }
