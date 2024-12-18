@@ -198,8 +198,12 @@ func parseCreature(data string) (Creature, error) {
 	}
 
 	// Parse description
-	desc, _ := parseDescription(lines, creature.Name)
+	desc, nextIndex := parseDescription(lines, creature.Name)
 	creature.Desc = desc
+
+	// Parse salvage (optional)
+	salvage, nextIndex := parseSalvage(lines, creature.Name, nextIndex)
+	creature.Salvage = salvage
 
 	return creature, nil
 }
@@ -224,4 +228,31 @@ func parseDescription(lines []string, creatureName string) (string, int) {
 	}
 
 	return strings.TrimSpace(strings.Join(description, " ")), len(lines)
+}
+
+// parseSalvage extracts the salvage section from the input data
+func parseSalvage(lines []string, creatureName string, startIndex int) (string, int) {
+	salvage := []string{}
+	creatureNameLower := strings.ToLower(creatureName)
+
+	for i := startIndex; i < len(lines); i++ {
+		line := strings.TrimSpace(lines[i])
+		lineLower := strings.ToLower(line)
+
+		// Skip the line with the word "salvage"
+		if lineLower == "salvage" {
+			continue
+		}
+
+		// Check if the line is a stopping point
+		if lineLower == "lore" || lineLower == creatureNameLower {
+			return strings.TrimSpace(strings.Join(salvage, " ")), i
+		}
+
+		// Add the line to the salvage section
+		salvage = append(salvage, line)
+	}
+
+	// If no stopping point is found, return the collected salvage and the last index
+	return strings.TrimSpace(strings.Join(salvage, " ")), len(lines)
 }
