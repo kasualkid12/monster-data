@@ -1,0 +1,231 @@
+{% extends "base.html" %} {% block content %}
+<h1>Add New Creature</h1>
+<form method="POST" class="needs-validation" novalidate>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input type="text" class="form-control" id="name" name="name" required />
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="type" class="form-label">Type</label>
+      <input type="text" class="form-control" id="type" name="type" required />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="size" class="form-label">Size</label>
+      <select class="form-select" id="size" name="size" required>
+        <option value="Tiny">Tiny</option>
+        <option value="Small">Small</option>
+        <option value="Medium">Medium</option>
+        <option value="Large">Large</option>
+        <option value="Huge">Huge</option>
+        <option value="Gargantuan">Gargantuan</option>
+      </select>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="alignment" class="form-label">Alignment</label>
+      <input
+        type="text"
+        class="form-control"
+        id="alignment"
+        name="alignment"
+        required
+      />
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="challenge_rating" class="form-label">Challenge Rating</label>
+      <input
+        type="number"
+        step="0.5"
+        class="form-control"
+        id="challenge_rating"
+        name="challenge_rating"
+      />
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="desc" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      id="desc"
+      name="desc"
+      rows="3"
+      required
+    ></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="salvage" class="form-label">Salvage Information</label>
+    <textarea
+      class="form-control"
+      id="salvage"
+      name="salvage"
+      rows="3"
+    ></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="lore" class="form-label">Lore (one per line)</label>
+    <textarea class="form-control" id="lore" name="lore" rows="3"></textarea>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="armor_class" class="form-label">Armor Class</label>
+      <input
+        type="number"
+        class="form-control"
+        id="armor_class"
+        name="armor_class"
+      />
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="hit_points" class="form-label">Hit Points</label>
+      <input
+        type="number"
+        class="form-control"
+        id="hit_points"
+        name="hit_points"
+      />
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="hit_dice" class="form-label">Hit Dice</label>
+      <input type="text" class="form-control" id="hit_dice" name="hit_dice" />
+    </div>
+  </div>
+
+  <h3 class="mt-4">Speed</h3>
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <label for="speed_walk" class="form-label">Walk</label>
+      <input
+        type="text"
+        class="form-control"
+        id="speed_walk"
+        name="speed_walk"
+      />
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="speed_fly" class="form-label">Fly</label>
+      <input type="text" class="form-control" id="speed_fly" name="speed_fly" />
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="speed_swim" class="form-label">Swim</label>
+      <input
+        type="text"
+        class="form-control"
+        id="speed_swim"
+        name="speed_swim"
+      />
+    </div>
+  </div>
+
+  <h3 class="mt-4">Ability Scores</h3>
+  <div class="row">
+    <div class="col-md-2 mb-3">
+      <label for="strength" class="form-label">STR</label>
+      <input type="number" class="form-control" id="strength" name="strength" />
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="dexterity" class="form-label">DEX</label>
+      <input
+        type="number"
+        class="form-control"
+        id="dexterity"
+        name="dexterity"
+      />
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="constitution" class="form-label">CON</label>
+      <input
+        type="number"
+        class="form-control"
+        id="constitution"
+        name="constitution"
+      />
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="intelligence" class="form-label">INT</label>
+      <input
+        type="number"
+        class="form-control"
+        id="intelligence"
+        name="intelligence"
+      />
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="wisdom" class="form-label">WIS</label>
+      <input type="number" class="form-control" id="wisdom" name="wisdom" />
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="charisma" class="form-label">CHA</label>
+      <input type="number" class="form-control" id="charisma" name="charisma" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="languages" class="form-label">Languages</label>
+      <input type="text" class="form-control" id="languages" name="languages" />
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="passive_perception" class="form-label"
+        >Passive Perception</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="passive_perception"
+        name="passive_perception"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="proficiency_bonus" class="form-label"
+        >Proficiency Bonus</label
+      >
+      <input
+        type="number"
+        class="form-control"
+        id="proficiency_bonus"
+        name="proficiency_bonus"
+      />
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="xp" class="form-label">XP</label>
+      <input type="number" class="form-control" id="xp" name="xp" />
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary">Add Creature</button>
+    <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+  </div>
+</form>
+
+<script>
+  // Form validation
+  (function () {
+    'use strict';
+    var forms = document.querySelectorAll('.needs-validation');
+    Array.prototype.slice.call(forms).forEach(function (form) {
+      form.addEventListener(
+        'submit',
+        function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        },
+        false
+      );
+    });
+  })();
+</script>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block content %}
+<h1>Search Creatures</h1>
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <form method="GET" class="d-flex">
+      <input
+        type="text"
+        name="q"
+        class="form-control me-2"
+        placeholder="Search by name, type, or description..."
+        value="{{ query }}"
+      />
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+</div>
+
+{% if query %}
+<h2>Search Results for "{{ query }}"</h2>
+{% if creatures %}
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Size</th>
+        <th>Alignment</th>
+        <th>Challenge Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for creature in creatures %}
+      <tr>
+        <td>{{ creature.name }}</td>
+        <td>{{ creature.type }}</td>
+        <td>{{ creature.size }}</td>
+        <td>{{ creature.alignment }}</td>
+        <td>{{ creature.challenge_rating }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<div class="alert alert-info">
+  No creatures found matching your search criteria.
+</div>
+{% endif %} {% endif %} {% endblock %}
