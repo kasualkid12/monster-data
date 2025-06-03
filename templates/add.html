@@ -6,9 +6,34 @@
       <label for="name" class="form-label">Name</label>
       <input type="text" class="form-control" id="name" name="name" required />
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-4 mb-3">
       <label for="type" class="form-label">Type</label>
-      <input type="text" class="form-control" id="type" name="type" required />
+      <select class="form-select" id="type" name="type" required>
+        <option value="aberration">Aberration</option>
+        <option value="beast">Beast</option>
+        <option value="celestial">Celestial</option>
+        <option value="construct">Construct</option>
+        <option value="dragon">Dragon</option>
+        <option value="elemental">Elemental</option>
+        <option value="fey">Fey</option>
+        <option value="fiend">Fiend</option>
+        <option value="giant">Giant</option>
+        <option value="humanoid">Humanoid</option>
+        <option value="monstrosity">Monstrosity</option>
+        <option value="ooze">Ooze</option>
+        <option value="plant">Plant</option>
+        <option value="undead">Undead</option>
+      </select>
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="type_tag" class="form-label">Type Tag (Optional)</label>
+      <input
+        type="text"
+        class="form-control"
+        id="type_tag"
+        name="type_tag"
+        placeholder="e.g. orc"
+      />
     </div>
   </div>
 
@@ -26,23 +51,62 @@
     </div>
     <div class="col-md-4 mb-3">
       <label for="alignment" class="form-label">Alignment</label>
-      <input
-        type="text"
-        class="form-control"
-        id="alignment"
-        name="alignment"
-        required
-      />
+      <select class="form-select" id="alignment" name="alignment" required>
+        <option value="lawful good">Lawful Good</option>
+        <option value="lawful neutral">Lawful Neutral</option>
+        <option value="lawful evil">Lawful Evil</option>
+        <option value="neutral good">Neutral Good</option>
+        <option value="true neutral">True Neutral</option>
+        <option value="neutral evil">Neutral Evil</option>
+        <option value="chaotic good">Chaotic Good</option>
+        <option value="chaotic neutral">Chaotic Neutral</option>
+        <option value="chaotic evil">Chaotic Evil</option>
+        <option value="unaligned">Unaligned</option>
+      </select>
     </div>
     <div class="col-md-4 mb-3">
       <label for="challenge_rating" class="form-label">Challenge Rating</label>
-      <input
-        type="number"
-        step="0.5"
-        class="form-control"
+      <select
+        class="form-select"
         id="challenge_rating"
         name="challenge_rating"
-      />
+        required
+      >
+        <option value="0">0</option>
+        <option value="0.125">1/8</option>
+        <option value="0.25">1/4</option>
+        <option value="0.5">1/2</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
+        <option value="16">16</option>
+        <option value="17">17</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+        <option value="26">26</option>
+        <option value="27">27</option>
+        <option value="28">28</option>
+        <option value="29">29</option>
+        <option value="30">30</option>
+      </select>
     </div>
   </div>
 
@@ -58,18 +122,45 @@
   </div>
 
   <div class="mb-3">
-    <label for="salvage" class="form-label">Salvage Information</label>
+    <label for="salvage" class="form-label"
+      >Salvage Information (Optional)</label
+    >
     <textarea
       class="form-control"
       id="salvage"
       name="salvage"
       rows="3"
     ></textarea>
+    <div class="form-text">
+      Leave blank if no salvage information is available.
+    </div>
   </div>
 
   <div class="mb-3">
-    <label for="lore" class="form-label">Lore (one per line)</label>
-    <textarea class="form-control" id="lore" name="lore" rows="3"></textarea>
+    <label class="form-label">Lore (Optional)</label>
+    <div id="lore-container">
+      <div class="input-group mb-2">
+        <input
+          type="text"
+          class="form-control"
+          name="lore[]"
+          placeholder="Enter lore entry"
+        />
+        <button
+          type="button"
+          class="btn btn-danger remove-lore"
+          onclick="removeLoreEntry(this)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary" onclick="addLoreEntry()">
+      Add Lore Entry
+    </button>
+    <div class="form-text">
+      Add any relevant lore entries. Leave empty if no lore is available.
+    </div>
   </div>
 
   <div class="row">
@@ -97,7 +188,7 @@
     </div>
   </div>
 
-  <h3 class="mt-4">Speed</h3>
+  <h3 class="mt-4">Speed (Optional)</h3>
   <div class="row">
     <div class="col-md-4 mb-3">
       <label for="speed_walk" class="form-label">Walk</label>
@@ -106,11 +197,18 @@
         class="form-control"
         id="speed_walk"
         name="speed_walk"
+        placeholder="e.g. 30 ft."
       />
     </div>
     <div class="col-md-4 mb-3">
       <label for="speed_fly" class="form-label">Fly</label>
-      <input type="text" class="form-control" id="speed_fly" name="speed_fly" />
+      <input
+        type="text"
+        class="form-control"
+        id="speed_fly"
+        name="speed_fly"
+        placeholder="e.g. 60 ft."
+      />
     </div>
     <div class="col-md-4 mb-3">
       <label for="speed_swim" class="form-label">Swim</label>
@@ -119,8 +217,35 @@
         class="form-control"
         id="speed_swim"
         name="speed_swim"
+        placeholder="e.g. 30 ft."
       />
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="speed_climb" class="form-label">Climb</label>
+      <input
+        type="text"
+        class="form-control"
+        id="speed_climb"
+        name="speed_climb"
+        placeholder="e.g. 30 ft."
+      />
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="speed_burrow" class="form-label">Burrow</label>
+      <input
+        type="text"
+        class="form-control"
+        id="speed_burrow"
+        name="speed_burrow"
+        placeholder="e.g. 20 ft."
+      />
+    </div>
+  </div>
+  <div class="form-text mb-3">
+    Enter speeds in feet (ft.) or leave blank if the creature doesn't have that
+    movement type.
   </div>
 
   <h3 class="mt-4">Ability Scores</h3>
@@ -184,24 +309,6 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <label for="proficiency_bonus" class="form-label"
-        >Proficiency Bonus</label
-      >
-      <input
-        type="number"
-        class="form-control"
-        id="proficiency_bonus"
-        name="proficiency_bonus"
-      />
-    </div>
-    <div class="col-md-6 mb-3">
-      <label for="xp" class="form-label">XP</label>
-      <input type="number" class="form-control" id="xp" name="xp" />
-    </div>
-  </div>
-
   <div class="mb-3">
     <button type="submit" class="btn btn-primary">Add Creature</button>
     <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
@@ -227,5 +334,27 @@
       );
     });
   })();
+
+  // Lore entry management
+  function addLoreEntry() {
+    const container = document.getElementById('lore-container');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'input-group mb-2';
+    newEntry.innerHTML = `
+      <input type="text" class="form-control" name="lore[]" placeholder="Enter lore entry">
+      <button type="button" class="btn btn-danger remove-lore" onclick="removeLoreEntry(this)">Remove</button>
+    `;
+    container.appendChild(newEntry);
+  }
+
+  function removeLoreEntry(button) {
+    const entry = button.parentElement;
+    const container = document.getElementById('lore-container');
+
+    // Don't remove if it's the last entry
+    if (container.children.length > 1) {
+      entry.remove();
+    }
+  }
 </script>
 {% endblock %}

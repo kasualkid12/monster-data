@@ -21,17 +21,80 @@ def index():
     return render_template("index.html", creatures=all_creatures)
 
 
+def get_proficiency_bonus(cr):
+    if cr <= 4:
+        return 2
+    elif cr <= 8:
+        return 3
+    elif cr <= 12:
+        return 4
+    elif cr <= 16:
+        return 5
+    elif cr <= 20:
+        return 6
+    elif cr <= 24:
+        return 7
+    elif cr <= 28:
+        return 8
+    else:
+        return 9
+
+
+def get_xp(cr):
+    xp_table = {
+        0: 0,
+        0.125: 25,
+        0.25: 50,
+        0.5: 100,
+        1: 200,
+        2: 450,
+        3: 700,
+        4: 1100,
+        5: 1800,
+        6: 2300,
+        7: 2900,
+        8: 3900,
+        9: 5000,
+        10: 5900,
+        11: 7200,
+        12: 8400,
+        13: 10000,
+        14: 11500,
+        15: 13000,
+        16: 15000,
+        17: 18000,
+        18: 20000,
+        19: 22000,
+        20: 25000,
+        21: 33000,
+        22: 41000,
+        23: 50000,
+        24: 62000,
+        25: 75000,
+        26: 90000,
+        27: 105000,
+        28: 120000,
+        29: 135000,
+        30: 155000,
+    }
+    return xp_table.get(float(cr), 0)
+
+
 @app.route("/add", methods=["GET", "POST"])
 def add_creature():
     if request.method == "POST":
+        challenge_rating = float(request.form["challenge_rating"])
         creature_data = {
             "name": request.form["name"],
             "index": request.form["name"].lower().replace(" ", "_"),
             "desc": request.form["desc"],
             "salvage": request.form["salvage"],
-            "lore": request.form["lore"].split("\n"),
+            "lore": [
+                entry for entry in request.form.getlist("lore[]") if entry.strip()
+            ],
             "size": request.form["size"],
-            "type": request.form["type"],
+            "type": request.form["type"]
+            + (f" ({request.form['type_tag']})" if request.form["type_tag"] else ""),
             "alignment": request.form["alignment"],
             "armor_class": (
                 int(request.form["armor_class"])
@@ -43,9 +106,15 @@ def add_creature():
             ),
             "hit_dice": request.form["hit_dice"],
             "speed": {
-                "walk": request.form["speed_walk"],
-                "fly": request.form["speed_fly"],
-                "swim": request.form["speed_swim"],
+                k: v
+                for k, v in {
+                    "walk": request.form["speed_walk"],
+                    "fly": request.form["speed_fly"],
+                    "swim": request.form["speed_swim"],
+                    "climb": request.form["speed_climb"],
+                    "burrow": request.form["speed_burrow"],
+                }.items()
+                if v
             },
             "strength": (
                 int(request.form["strength"]) if request.form["strength"] else 0
@@ -71,17 +140,9 @@ def add_creature():
                 )
             },
             "languages": request.form["languages"],
-            "challenge_rating": (
-                float(request.form["challenge_rating"])
-                if request.form["challenge_rating"]
-                else 0
-            ),
-            "proficiency_bonus": (
-                int(request.form["proficiency_bonus"])
-                if request.form["proficiency_bonus"]
-                else 0
-            ),
-            "xp": int(request.form["xp"]) if request.form["xp"] else 0,
+            "challenge_rating": challenge_rating,
+            "proficiency_bonus": get_proficiency_bonus(challenge_rating),
+            "xp": get_xp(challenge_rating),
         }
 
         creatures.insert_one(creature_data)
