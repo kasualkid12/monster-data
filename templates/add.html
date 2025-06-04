@@ -310,6 +310,51 @@
   </div>
 
   <div class="mb-3">
+    <label class="form-label">Proficiencies (Optional)</label>
+    <div id="proficiencies-container">
+      <div class="input-group mb-2">
+        <select
+          class="form-select proficiency-type"
+          name="proficiency_type[]"
+          onchange="updateProficiencyOptions(this)"
+        >
+          <option value="">Select type...</option>
+          <option value="saving-throw">Saving Throw</option>
+          <option value="skill">Skill</option>
+        </select>
+        <select
+          class="form-select proficiency-name"
+          name="proficiency_name[]"
+          disabled
+        >
+          <option value="">Select proficiency...</option>
+        </select>
+        <input
+          type="number"
+          class="form-control"
+          name="proficiency_value[]"
+          placeholder="Value"
+          min="-5"
+          max="30"
+        />
+        <button
+          type="button"
+          class="btn btn-danger remove-proficiency"
+          onclick="removeProficiency(this)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary" onclick="addProficiency()">
+      Add Proficiency
+    </button>
+    <div class="form-text">
+      Add saving throws and skills the creature is proficient in.
+    </div>
+  </div>
+
+  <div class="mb-3">
     <button type="submit" class="btn btn-primary">Add Creature</button>
     <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
   </div>
@@ -350,6 +395,89 @@
   function removeLoreEntry(button) {
     const entry = button.parentElement;
     const container = document.getElementById('lore-container');
+
+    // Don't remove if it's the last entry
+    if (container.children.length > 1) {
+      entry.remove();
+    }
+  }
+
+  // Proficiency management
+  const savingThrows = [
+    { value: 'saving-throw-str', name: 'Saving Throw: STR' },
+    { value: 'saving-throw-dex', name: 'Saving Throw: DEX' },
+    { value: 'saving-throw-con', name: 'Saving Throw: CON' },
+    { value: 'saving-throw-int', name: 'Saving Throw: INT' },
+    { value: 'saving-throw-wis', name: 'Saving Throw: WIS' },
+    { value: 'saving-throw-cha', name: 'Saving Throw: CHA' },
+  ];
+
+  const skills = [
+    { value: 'skill-athletics', name: 'Skill: Athletics' },
+    { value: 'skill-acrobatics', name: 'Skill: Acrobatics' },
+    { value: 'skill-sleight-of-hand', name: 'Skill: Sleight of Hand' },
+    { value: 'skill-stealth', name: 'Skill: Stealth' },
+    { value: 'skill-arcana', name: 'Skill: Arcana' },
+    { value: 'skill-history', name: 'Skill: History' },
+    { value: 'skill-investigation', name: 'Skill: Investigation' },
+    { value: 'skill-nature', name: 'Skill: Nature' },
+    { value: 'skill-religion', name: 'Skill: Religion' },
+    { value: 'skill-animal-handling', name: 'Skill: Animal Handling' },
+    { value: 'skill-insight', name: 'Skill: Insight' },
+    { value: 'skill-medicine', name: 'Skill: Medicine' },
+    { value: 'skill-perception', name: 'Skill: Perception' },
+    { value: 'skill-survival', name: 'Skill: Survival' },
+    { value: 'skill-intimidation', name: 'Skill: Intimidation' },
+    { value: 'skill-performance', name: 'Skill: Performance' },
+    { value: 'skill-persuasion', name: 'Skill: Persuasion' },
+    { value: 'skill-deception', name: 'Skill: Deception' },
+  ];
+
+  function updateProficiencyOptions(select) {
+    const type = select.value;
+    const nameSelect = select.parentElement.querySelector('.proficiency-name');
+    nameSelect.innerHTML = '<option value="">Select proficiency...</option>';
+    nameSelect.disabled = !type;
+
+    if (type === 'saving-throw') {
+      savingThrows.forEach((throw_) => {
+        const option = document.createElement('option');
+        option.value = throw_.value;
+        option.textContent = throw_.name;
+        nameSelect.appendChild(option);
+      });
+    } else if (type === 'skill') {
+      skills.forEach((skill) => {
+        const option = document.createElement('option');
+        option.value = skill.value;
+        option.textContent = skill.name;
+        nameSelect.appendChild(option);
+      });
+    }
+  }
+
+  function addProficiency() {
+    const container = document.getElementById('proficiencies-container');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'input-group mb-2';
+    newEntry.innerHTML = `
+      <select class="form-select proficiency-type" name="proficiency_type[]" onchange="updateProficiencyOptions(this)">
+        <option value="">Select type...</option>
+        <option value="saving-throw">Saving Throw</option>
+        <option value="skill">Skill</option>
+      </select>
+      <select class="form-select proficiency-name" name="proficiency_name[]" disabled>
+        <option value="">Select proficiency...</option>
+      </select>
+      <input type="number" class="form-control" name="proficiency_value[]" placeholder="Value" min="-5" max="30">
+      <button type="button" class="btn btn-danger remove-proficiency" onclick="removeProficiency(this)">Remove</button>
+    `;
+    container.appendChild(newEntry);
+  }
+
+  function removeProficiency(button) {
+    const entry = button.parentElement;
+    const container = document.getElementById('proficiencies-container');
 
     // Don't remove if it's the last entry
     if (container.children.length > 1) {

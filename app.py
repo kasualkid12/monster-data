@@ -143,6 +143,28 @@ def add_creature():
             "challenge_rating": challenge_rating,
             "proficiency_bonus": get_proficiency_bonus(challenge_rating),
             "xp": get_xp(challenge_rating),
+            "proficiencies": [
+                {
+                    "value": int(value),
+                    "proficiency": {
+                        "index": name,
+                        "name": name.replace("-", " ")
+                        .title()
+                        .replace("Str", "STR")
+                        .replace("Dex", "DEX")
+                        .replace("Con", "CON")
+                        .replace("Int", "INT")
+                        .replace("Wis", "WIS")
+                        .replace("Cha", "CHA"),
+                    },
+                }
+                for type_, name, value in zip(
+                    request.form.getlist("proficiency_type[]"),
+                    request.form.getlist("proficiency_name[]"),
+                    request.form.getlist("proficiency_value[]"),
+                )
+                if type_ and name and value
+            ],
         }
 
         creatures.insert_one(creature_data)

@@ -1,0 +1,421 @@
+SON Schema for D&D 5e Creature data. Some data, such as ability score modifiers, are not included because they are extrapolated.
+Samples may be found on GitHub
+
+$comment: version 0.1.1
+
+Type: object
+
+Properties
+
+    name required
+        path: /properties/name
+        Type: string
+    alignment
+        path: /properties/alignment
+        Type: string
+    speed required
+        path: /properties/speed
+        Speed in feet
+        Type: object
+        Properties
+            speed . Walk
+                path: /properties/speed/properties/Walk
+                Type: integer
+                Default: 0
+            speed . Burrow
+                path: /properties/speed/properties/Burrow
+                Types: integer, boolean
+                Default: false
+            speed . Climb
+                path: /properties/speed/properties/Climb
+                Types: integer, boolean
+                Default: 0
+            speed . Fly
+                path: /properties/speed/properties/Fly
+                Types: integer, boolean
+                Default: false
+            speed . Hover
+                path: /properties/speed/properties/Hover
+                Type: boolean
+                Default: false
+            speed . Swim
+                path: /properties/speed/properties/Swim
+                Types: integer, boolean
+                Default: 0
+    hit_points required
+        path: /properties/hit_points
+        Type: object
+        Properties
+            hit_points . max
+                path: /properties/hit_points/properties/max
+                Type: integer
+                Default: 0
+            hit_points . current
+                path: /properties/hit_points/properties/current
+                Type: integer
+            hit_points . temporary
+                path: /properties/hit_points/properties/temporary
+                Type: integer
+            hit_points . dice
+                path: /properties/hit_points/properties/dice
+                Type: array
+                    Items
+                    path: /properties/hit_points/properties/dice/items
+                    $ref: dice.schema.json
+            hit_points . description
+                path: /properties/hit_points/properties/description
+                Type: string
+    inspiration
+        path: /properties/inspiration
+        Type: string
+    skills
+        path: /properties/skills
+        Type: object
+        Additional Properties: false
+        Properties
+            skills . Athletics
+                path: /properties/skills/properties/Athletics
+                Types: boolean, integer
+                Default: false
+            skills . Acrobatics
+                path: /properties/skills/properties/Acrobatics
+                Types: boolean, integer
+                Default: false
+            skills . SleightOfHand
+                path: /properties/skills/properties/SleightOfHand
+                Types: boolean, integer
+                Default: false
+            skills . Stealth
+                path: /properties/skills/properties/Stealth
+                Types: boolean, integer
+                Default: false
+            skills . Arcana
+                path: /properties/skills/properties/Arcana
+                Types: boolean, integer
+                Default: false
+            skills . History
+                path: /properties/skills/properties/History
+                Types: boolean, integer
+                Default: false
+            skills . Investigation
+                path: /properties/skills/properties/Investigation
+                Types: boolean, integer
+                Default: false
+            skills . Nature
+                path: /properties/skills/properties/Nature
+                Types: boolean, integer
+                Default: false
+            skills . Religion
+                path: /properties/skills/properties/Religion
+                Types: boolean, integer
+                Default: false
+            skills . AnimalHandling
+                path: /properties/skills/properties/AnimalHandling
+                Types: boolean, integer
+                Default: false
+            skills . Insight
+                path: /properties/skills/properties/Insight
+                Types: boolean, integer
+                Default: false
+            skills . Medicine
+                path: /properties/skills/properties/Medicine
+                Types: boolean, integer
+                Default: false
+            skills . Perception
+                path: /properties/skills/properties/Perception
+                Types: boolean, integer
+                Default: false
+            skills . Survival
+                path: /properties/skills/properties/Survival
+                Types: boolean, integer
+                Default: false
+            skills . Deception
+                path: /properties/skills/properties/Deception
+                Types: boolean, integer
+                Default: false
+            skills . Intimidation
+                path: /properties/skills/properties/Intimidation
+                Types: boolean, integer
+                Default: false
+            skills . Performance
+                path: /properties/skills/properties/Performance
+                Types: boolean, integer
+                Default: false
+            skills . Persuasion
+                path: /properties/skills/properties/Persuasion
+                Types: boolean, integer
+                Default: false
+    languages
+        path: /properties/languages
+        Type: array
+            Items
+            path: /properties/languages/items
+            Type: string
+            Examples:
+                “Common”
+                “Abyssal”
+                “Draconic”
+                “Dwarvish”
+                “Elven”
+    ability_scores required
+        path: /properties/ability_scores
+        Type: object
+        Properties
+            ability_scores . str
+                path: /properties/ability_scores/properties/str
+                Strength
+                Type: integer
+                Default: 10
+                Range: ≥ 0
+            ability_scores . dex
+                path: /properties/ability_scores/properties/dex
+                Dexterty
+                Type: integer
+                Default: 10
+                Range: ≥ 0
+            ability_scores . con
+                path: /properties/ability_scores/properties/con
+                Constitution
+                Type: integer
+                Default: 10
+                Range: ≥ 0
+            ability_scores . int
+                path: /properties/ability_scores/properties/int
+                Intelligence
+                Type: integer
+                Default: 10
+                Range: ≥ 0
+            ability_scores . wis
+                path: /properties/ability_scores/properties/wis
+                Wisdom
+                Type: integer
+                Default: 10
+                Range: ≥ 0
+            ability_scores . cha
+                path: /properties/ability_scores/properties/cha
+                Charisma
+                Type: integer
+                Default: 10
+                Range: ≥ 0
+    saving_throws
+        path: /properties/saving_throws
+        Type: object
+        Properties
+            saving_throws . str
+                path: /properties/saving_throws/properties/str
+                Types: boolean, integer
+                Default: false
+            saving_throws . dex
+                path: /properties/saving_throws/properties/dex
+                Types: boolean, integer
+                Default: false
+            saving_throws . con
+                path: /properties/saving_throws/properties/con
+                Types: boolean, integer
+                Default: false
+            saving_throws . int
+                path: /properties/saving_throws/properties/int
+                Types: boolean, integer
+                Default: false
+            saving_throws . wis
+                path: /properties/saving_throws/properties/wis
+                Types: boolean, integer
+                Default: false
+            saving_throws . cha
+                path: /properties/saving_throws/properties/cha
+                Types: boolean, integer
+                Default: false
+    senses
+        path: /properties/senses
+        $ref: senses.schema.json
+    description
+        path: /properties/description
+        Type: string
+    armor_class required
+        path: /properties/armor_class
+        Type: object
+        Properties
+            armor_class . value
+                path: /properties/armor_class/properties/value
+                Type: integer
+                Default: 10
+                Range: ≥ 0
+            armor_class . description
+                path: /properties/armor_class/properties/description
+                Type: string
+                Default: “Unarmored”
+    shield
+        path: /properties/shield
+        Toggle if shield is being used.
+        Type: boolean
+        Default: false
+    condtions
+        path: /properties/condtions
+        Type: object
+        Properties
+            condtions . Blinded
+                path: /properties/condtions/properties/Blinded
+                Type: boolean
+                Default: false
+            condtions . Charmed
+                path: /properties/condtions/properties/Charmed
+                Type: boolean
+                Default: false
+            condtions . Deafened
+                path: /properties/condtions/properties/Deafened
+                Type: boolean
+                Default: false
+            condtions . Exhaustion
+                path: /properties/condtions/properties/Exhaustion
+                Type: boolean
+                Default: false
+            condtions . Frightened
+                path: /properties/condtions/properties/Frightened
+                Type: boolean
+                Default: false
+            condtions . Grappled
+                path: /properties/condtions/properties/Grappled
+                Type: boolean
+                Default: false
+            condtions . Incapacitated
+                path: /properties/condtions/properties/Incapacitated
+                Type: boolean
+                Default: false
+            condtions . Invisible
+                path: /properties/condtions/properties/Invisible
+                Type: boolean
+                Default: false
+            condtions . Necrotic
+                path: /properties/condtions/properties/Necrotic
+                Type: boolean
+                Default: false
+            condtions . Paralyzed
+                path: /properties/condtions/properties/Paralyzed
+                Type: boolean
+                Default: false
+            condtions . Petrified
+                path: /properties/condtions/properties/Petrified
+                Type: boolean
+                Default: false
+            condtions . Poisoned
+                path: /properties/condtions/properties/Poisoned
+                Type: boolean
+                Default: false
+            condtions . Prone
+                path: /properties/condtions/properties/Prone
+                Type: boolean
+                Default: false
+            condtions . Restrained
+                path: /properties/condtions/properties/Restrained
+                Type: boolean
+                Default: false
+            condtions . Stunned
+                path: /properties/condtions/properties/Stunned
+                Type: boolean
+                Default: false
+            condtions . Unconscious
+                path: /properties/condtions/properties/Unconscious
+                Type: boolean
+                Default: false
+    condition_immunities
+        path: /properties/condition_immunities
+        Type: array
+            Items
+            path: /properties/condition_immunities/items
+            $ref: conditions.schema.json
+    damage_immunities
+        path: /properties/damage_immunities
+        Type: array
+            Items
+            path: /properties/damage_immunities/items
+            $ref: damage_type.schema.json
+    damage_resistances
+        path: /properties/damage_resistances
+        Type: array
+            Items
+            path: /properties/damage_resistances/items
+            $ref: damage_type.schema.json
+    damage_vulnerabilities
+        path: /properties/damage_vulnerabilities
+        Type: array
+            Items
+            path: /properties/damage_vulnerabilities/items
+            $ref: damage_type.schema.json
+    image
+        path: /properties/image
+        $ref: image.schema.json
+    source
+        path: /properties/source
+        $ref: source.schema.json
+
+
+This schema describes a Monster. Extends Creature.schema.json
+
+$comment: version 0.1.1
+
+Type: object
+
+Properties
+
+    size required
+        path: /properties/size
+        Type: string
+        Enum Values:
+            “Tiny”
+            “Small”
+            “Medium”
+            “Large”
+            “Huge”
+            “Gargantuan”
+    challenge_rating
+        path: /properties/challenge_rating
+        Type: number
+        Examples:
+            0.125
+            0.25
+            0.5
+            1
+            2
+    type required
+        path: /properties/type
+        Type: string
+        Enum Values:
+            “Aberration”
+            “Beast”
+            “Celestial”
+            “Construct”
+            “Dragon”
+            “Elemental”
+            “Fey”
+            “Fiend”
+            “Giant”
+            “Humanoid”
+            “Monstrosity”
+            “Ooze”
+            “Plant”
+            “Undead”
+            “Swarm of Tiny beasts”
+    subtype required
+        path: /properties/subtype
+        Type: string
+        Examples:
+            “Goblinoid”
+        Default: “Any Race”
+    traits
+        path: /properties/traits
+        Type: array
+            Items
+            path: /properties/traits/items
+            $ref: feature.schema.json
+            Creatures may have special traits.
+            Examples:
+                “Spellcasting”
+    actions
+        path: /properties/actions
+        Type: array
+            Items
+            path: /properties/actions/items
+            $ref: action.schema.json
+    tags
+        path: /properties/tags
+        $ref: tag.schema.json
