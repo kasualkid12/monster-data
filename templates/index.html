@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Creatures</h1>
+    <a href="{{ url_for('add_creature') }}" class="btn btn-primary"
+      >Add New Creature</a
+    >
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+  <div class="alert alert-{{ category }}">{{ message }}</div>
+  {% endfor %} {% endif %} {% endwith %}
+
+  <div class="row">
+    {% for creature in creatures %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ creature.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ creature.type }}</h6>
+          <p class="card-text">
+            <strong>Size:</strong> {{ creature.size }}<br />
+            <strong>CR:</strong> {{ creature.challenge_rating }}<br />
+            <strong>Alignment:</strong> {{ creature.alignment }}
+          </p>
+          <p class="card-text">
+            {{ creature.desc[:200] }}{% if creature.desc|length > 200 %}...{%
+            endif %}
+          </p>
+        </div>
+        <div class="card-footer">
+          <a
+            href="{{ url_for('search', q=creature.name) }}"
+            class="btn btn-sm btn-outline-primary"
+            >View Details</a
+          >
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+      <div class="alert alert-info">
+        No creatures found.
+        <a href="{{ url_for('add_creature') }}">Add your first creature</a>!
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

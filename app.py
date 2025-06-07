@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 import os
+import json
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -10,8 +11,15 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
 # MongoDB connection
-client = MongoClient("mongodb://localhost:27017/")
-db = client["grim_hallow"]
+mongo_user = os.getenv("MONGO_USER", "admin")
+mongo_pass = os.getenv("MONGO_PASS", "changeme")
+mongo_db = os.getenv("MONGO_DB", "dnd_monster_data")
+mongo_host = os.getenv("MONGO_HOST", "mongo")
+mongo_port = os.getenv("MONGO_PORT", "27017")
+
+mongo_uri = f"mongodb://{mongo_user}:{mongo_pass}@{mongo_host}:{mongo_port}/"
+client = MongoClient(mongo_uri)
+db = client[mongo_db]
 creatures = db["creatures"]
 
 
@@ -83,7 +91,8 @@ def get_xp(cr):
 @app.route("/add", methods=["GET", "POST"])
 def add_creature():
     if request.method == "POST":
-        challenge_rating = float(request.form["challenge_rating"])
+        cr = float(request.form["challenge_rating"])
+        challenge_rating = cr if 0 < cr < 1 else int(cr)
         creature_data = {
             "name": request.form["name"],
             "index": request.form["name"].lower().replace(" ", "_"),
@@ -133,11 +142,15 @@ def add_creature():
                 int(request.form["charisma"]) if request.form["charisma"] else 0
             ),
             "senses": {
-                "passive_perception": (
-                    int(request.form["passive_perception"])
-                    if request.form["passive_perception"]
-                    else 0
-                )
+                "passive_perception": int(request.form["passive_perception"]),
+                **{
+                    sense_type: f"{range_} ft."
+                    for sense_type, range_ in zip(
+                        request.form.getlist("sense_type[]"),
+                        request.form.getlist("sense_range[]"),
+                    )
+                    if sense_type and range_
+                },
             },
             "languages": request.form["languages"],
             "challenge_rating": challenge_rating,
@@ -165,8 +178,92 @@ def add_creature():
                 )
                 if type_ and name and value
             ],
+            "damage_vulnerabilities": (
+                [v for v in request.form.getlist("vulnerability[]") if v]
+                + (
+                    ["bludgeoning", "piercing", "slashing from nonmagical weapons"]
+                    if request.form.get("vulnerability-nonmagical")
+                    else []
+                )
+            ),
+            "damage_resistances": (
+                [r for r in request.form.getlist("resistance[]") if r]
+                + (
+                    ["bludgeoning", "piercing", "slashing from nonmagical weapons"]
+                    if request.form.get("resistance-nonmagical")
+                    else []
+                )
+            ),
+            "damage_immunities": (
+                [i for i in request.form.getlist("immunity[]") if i]
+                + (
+                    ["bludgeoning", "piercing", "slashing from nonmagical weapons"]
+                    if request.form.get("immunity-nonmagical")
+                    else []
+                )
+            ),
+            "condition_immunities": [
+                c for c in request.form.getlist("condition_immunity[]") if c
+            ],
+            "special_abilities": [
+                {"name": name, "desc": desc}
+                for name, desc in zip(
+                    request.form.getlist("ability_name[]"),
+                    request.form.getlist("ability_desc[]"),
+                )
+                if name and desc
+            ],
+            "actions": [
+                {
+                    "name": name,
+                    "desc": desc,
+                    "attack_bonus": int(attack_bonus) if attack_bonus else None,
+                    "damage": [
+                        {
+                            "damage_type": {
+                                "index": damage_type.lower(),
+                                "name": damage_type,
+                            },
+                            "damage_dice": damage_dice,
+                        }
+                        for damage_type, damage_dice in zip(
+                            request.form.getlist("action_damage_type[]"),
+                            request.form.getlist("action_damage_dice[]"),
+                        )
+                        if damage_type and damage_dice
+                    ],
+                    "actions": [],  # Placeholder for nested actions if needed
+                }
+                for name, desc, attack_bonus in zip(
+                    request.form.getlist("action_name[]"),
+                    request.form.getlist("action_desc[]"),
+                    request.form.getlist("action_attack_bonus[]"),
+                )
+                if name and desc
+            ],
+            "reactions": [
+                {"name": name, "desc": desc}
+                for name, desc in zip(
+                    request.form.getlist("reaction_name[]"),
+                    request.form.getlist("reaction_desc[]"),
+                )
+                if name and desc
+            ],
+            "legendary_actions": [
+                {
+                    "name": name,
+                    "desc": desc,
+                    "actions": [],  # Placeholder for nested actions if needed
+                }
+                for name, desc in zip(
+                    request.form.getlist("legendary_action_name[]"),
+                    request.form.getlist("legendary_action_desc[]"),
+                )
+                if name and desc
+            ],
         }
 
+        # Insert into MongoDB
         creatures.insert_one(creature_data)
         flash("Creature added successfully!", "success")
         return redirect(url_for("index"))
@@ -177,21 +274,58 @@ def add_creature():
 @app.route("/search")
 def search():
     query = request.args.get("q", "")
+    creature_type = request.args.get("type", "")
+    min_cr = request.args.get("min_cr", "")
+    max_cr = request.args.get("max_cr", "")
+
+    # Build the search query
+    search_query = {}
+
+    # Text search across name and description
     if query:
+        search_query["$or"] = [
+            {"name": {"$regex": query, "$options": "i"}},
+            {"desc": {"$regex": query, "$options": "i"}},
+        ]
+
+    # Filter by creature type
+    if creature_type:
+        search_query["type"] = {"$regex": creature_type, "$options": "i"}
+
+    # Filter by challenge rating range
+    if min_cr or max_cr:
+        cr_query = {}
+        if min_cr:
+            cr_query["$gte"] = float(min_cr)
+        if max_cr:
+            cr_query["$lte"] = float(max_cr)
+        search_query["challenge_rating"] = cr_query
+
+    # Get all creature types for the filter dropdown
+    all_types = creatures.distinct("type")
+
+    # Execute search
+    if search_query:
         results = list(
-            creatures.find(
-                {
-                    "$or": [
-                        {"name": {"$regex": query, "$options": "i"}},
-                        {"type": {"$regex": query, "$options": "i"}},
-                        {"desc": {"$regex": query, "$options": "i"}},
-                    ]
-                }
+            creatures.find(search_query).sort(
+                [
+                    ("type", 1),  # Sort by type first
+                    ("challenge_rating", 1),  # Then by challenge rating
+                ]
             )
         )
     else:
         results = []
-    return render_template("search.html", creatures=results, query=query)
+
+    return render_template(
+        "search.html",
+        creatures=results,
+        query=query,
+        selected_type=creature_type,
+        min_cr=min_cr,
+        max_cr=max_cr,
+        creature_types=all_types,
+    )
 
 
 if __name__ == "__main__":

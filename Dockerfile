@@ -1,8 +1,20 @@
-# Use the official MongoDB image from Docker Hub
-FROM mongo:latest
+# Use Python 3.9 slim image
+FROM python:3.9-slim
 
-# Copy your JSON file to the container
-COPY monsters.json /monsters.json
+# Set working directory
+WORKDIR /app
 
-# Run the MongoDB and import the JSON file
-CMD mongoimport --host mongodb --db gh_database --collection gh_collection --file /monsters.json --jsonArray
+# Copy requirements first to leverage Docker cache
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 5000
+
+# Command to run the application
+CMD ["python", "app.py"]

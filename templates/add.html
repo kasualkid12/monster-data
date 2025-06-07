@@ -305,7 +305,78 @@
         class="form-control"
         id="passive_perception"
         name="passive_perception"
+        required
       />
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Special Senses (Optional)</label>
+    <div id="senses-container">
+      <div class="input-group mb-2">
+        <select class="form-select sense-type" name="sense_type[]">
+          <option value="">Select sense...</option>
+          <option value="blindsight">Blindsight</option>
+          <option value="darkvision">Darkvision</option>
+          <option value="tremorsense">Tremorsense</option>
+          <option value="truesight">Truesight</option>
+        </select>
+        <input
+          type="number"
+          class="form-control"
+          name="sense_range[]"
+          placeholder="Range in feet"
+          min="0"
+        />
+        <button
+          type="button"
+          class="btn btn-danger remove-sense"
+          onclick="removeSense(this)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary" onclick="addSense()">
+      Add Special Sense
+    </button>
+    <div class="form-text">
+      Add any special senses the creature has, with their range in feet.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Special Abilities (Optional)</label>
+    <div id="abilities-container">
+      <div class="input-group mb-2">
+        <input
+          type="text"
+          class="form-control"
+          name="ability_name[]"
+          placeholder="Ability name"
+          style="max-width: 200px"
+        />
+        <textarea
+          class="form-control"
+          name="ability_desc[]"
+          placeholder="Ability description"
+          rows="2"
+        ></textarea>
+        <button
+          type="button"
+          class="btn btn-danger remove-ability"
+          onclick="removeAbility(this)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary" onclick="addAbility()">
+      Add Special Ability
+    </button>
+    <div class="form-text">
+      Add any special abilities the creature has, with their names and
+      descriptions.
     </div>
   </div>
 
@@ -351,6 +422,387 @@
     </button>
     <div class="form-text">
       Add saving throws and skills the creature is proficient in.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Damage Vulnerabilities (Optional)</label>
+    <div id="vulnerabilities-container">
+      <div class="input-group mb-2">
+        <select class="form-select damage-type" name="vulnerability[]">
+          <option value="">Select damage type...</option>
+          <option value="Piercing">Piercing</option>
+          <option value="Slashing">Slashing</option>
+          <option value="Bludgeoning">Bludgeoning</option>
+          <option value="Acid">Acid</option>
+          <option value="Cold">Cold</option>
+          <option value="Fire">Fire</option>
+          <option value="Force">Force</option>
+          <option value="Lightning">Lightning</option>
+          <option value="Necrotic">Necrotic</option>
+          <option value="Poison">Poison</option>
+          <option value="Psychic">Psychic</option>
+          <option value="Radiant">Radiant</option>
+          <option value="Thunder">Thunder</option>
+        </select>
+        <button
+          type="button"
+          class="btn btn-danger remove-damage"
+          onclick="removeDamageType(this)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      onclick="addDamageType('vulnerabilities')"
+    >
+      Add Vulnerability
+    </button>
+    <div class="form-check mt-2">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="vulnerability-nonmagical"
+        name="vulnerability-nonmagical"
+      />
+      <label class="form-check-label" for="vulnerability-nonmagical">
+        Include nonmagical weapon damage types
+      </label>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Damage Resistances (Optional)</label>
+    <div id="resistances-container">
+      <div class="input-group mb-2">
+        <select class="form-select damage-type" name="resistance[]">
+          <option value="">Select damage type...</option>
+          <option value="Piercing">Piercing</option>
+          <option value="Slashing">Slashing</option>
+          <option value="Bludgeoning">Bludgeoning</option>
+          <option value="Acid">Acid</option>
+          <option value="Cold">Cold</option>
+          <option value="Fire">Fire</option>
+          <option value="Force">Force</option>
+          <option value="Lightning">Lightning</option>
+          <option value="Necrotic">Necrotic</option>
+          <option value="Poison">Poison</option>
+          <option value="Psychic">Psychic</option>
+          <option value="Radiant">Radiant</option>
+          <option value="Thunder">Thunder</option>
+        </select>
+        <button
+          type="button"
+          class="btn btn-danger remove-damage"
+          onclick="removeDamageType(this)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      onclick="addDamageType('resistances')"
+    >
+      Add Resistance
+    </button>
+    <div class="form-check mt-2">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="resistance-nonmagical"
+        name="resistance-nonmagical"
+      />
+      <label class="form-check-label" for="resistance-nonmagical">
+        Include nonmagical weapon damage types
+      </label>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Damage Immunities (Optional)</label>
+    <div id="immunities-container">
+      <div class="input-group mb-2">
+        <select class="form-select damage-type" name="immunity[]">
+          <option value="">Select damage type...</option>
+          <option value="Piercing">Piercing</option>
+          <option value="Slashing">Slashing</option>
+          <option value="Bludgeoning">Bludgeoning</option>
+          <option value="Acid">Acid</option>
+          <option value="Cold">Cold</option>
+          <option value="Fire">Fire</option>
+          <option value="Force">Force</option>
+          <option value="Lightning">Lightning</option>
+          <option value="Necrotic">Necrotic</option>
+          <option value="Poison">Poison</option>
+          <option value="Psychic">Psychic</option>
+          <option value="Radiant">Radiant</option>
+          <option value="Thunder">Thunder</option>
+        </select>
+        <button
+          type="button"
+          class="btn btn-danger remove-damage"
+          onclick="removeDamageType(this)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      onclick="addDamageType('immunities')"
+    >
+      Add Immunity
+    </button>
+    <div class="form-check mt-2">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="immunity-nonmagical"
+        name="immunity-nonmagical"
+      />
+      <label class="form-check-label" for="immunity-nonmagical">
+        Include nonmagical weapon damage types
+      </label>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Condition Immunities (Optional)</label>
+    <div id="condition-immunities-container">
+      <div class="input-group mb-2">
+        <select class="form-select condition-type" name="condition_immunity[]">
+          <option value="">Select condition...</option>
+          <option value="Blinded">Blinded</option>
+          <option value="Charmed">Charmed</option>
+          <option value="Deafened">Deafened</option>
+          <option value="Exhaustion">Exhaustion</option>
+          <option value="Frightened">Frightened</option>
+          <option value="Grappled">Grappled</option>
+          <option value="Incapacitated">Incapacitated</option>
+          <option value="Invisible">Invisible</option>
+          <option value="Necrotic">Necrotic</option>
+          <option value="Paralyzed">Paralyzed</option>
+          <option value="Petrified">Petrified</option>
+          <option value="Poisoned">Poisoned</option>
+          <option value="Prone">Prone</option>
+          <option value="Restrained">Restrained</option>
+          <option value="Stunned">Stunned</option>
+          <option value="Unconscious">Unconscious</option>
+        </select>
+        <button
+          type="button"
+          class="btn btn-danger remove-condition"
+          onclick="removeCondition(this)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary" onclick="addCondition()">
+      Add Condition Immunity
+    </button>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Actions (Optional)</label>
+    <div id="actions-container">
+      <div class="action-entry mb-3 p-3 border rounded">
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <input
+              type="text"
+              class="form-control"
+              name="action_name[]"
+              placeholder="Action name"
+            />
+          </div>
+          <div class="col-md-4">
+            <input
+              type="number"
+              class="form-control"
+              name="action_attack_bonus[]"
+              placeholder="Attack bonus"
+            />
+          </div>
+          <div class="col-md-2">
+            <button
+              type="button"
+              class="btn btn-danger w-100"
+              onclick="removeAction(this)"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+        <div class="mb-2">
+          <textarea
+            class="form-control"
+            name="action_desc[]"
+            placeholder="Action description (e.g. Melee Weapon Attack: +24 to hit, reach 10 ft., one target)"
+            rows="2"
+          ></textarea>
+        </div>
+        <div class="damage-section mb-2">
+          <label class="form-label">Damage</label>
+          <div class="damage-entries">
+            <div class="damage-entry input-group mb-2">
+              <select
+                class="form-select damage-type"
+                name="action_damage_type[]"
+              >
+                <option value="">Select damage type...</option>
+                <option value="piercing">Piercing</option>
+                <option value="slashing">Slashing</option>
+                <option value="bludgeoning">Bludgeoning</option>
+                <option value="acid">Acid</option>
+                <option value="cold">Cold</option>
+                <option value="fire">Fire</option>
+                <option value="force">Force</option>
+                <option value="lightning">Lightning</option>
+                <option value="necrotic">Necrotic</option>
+                <option value="poison">Poison</option>
+                <option value="psychic">Psychic</option>
+                <option value="radiant">Radiant</option>
+                <option value="thunder">Thunder</option>
+              </select>
+              <input
+                type="text"
+                class="form-control"
+                name="action_damage_dice[]"
+                placeholder="Damage dice (e.g. 4d6+9)"
+              />
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="removeDamageEntry(this)"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            onclick="addDamageEntry(this)"
+          >
+            Add Damage Type
+          </button>
+        </div>
+        <div class="nested-actions-section mb-2">
+          <label class="form-label">Nested Actions (Optional)</label>
+          <div class="nested-actions">
+            <!-- Nested actions will be added here -->
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            onclick="addNestedAction(this)"
+          >
+            Add Nested Action
+          </button>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary" onclick="addAction()">
+      Add Action
+    </button>
+    <div class="form-text">
+      Add creature actions with their names, descriptions, attack bonuses, and
+      damage information.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Reactions (Optional)</label>
+    <div id="reactions-container">
+      <div class="input-group mb-2">
+        <input
+          type="text"
+          class="form-control"
+          name="reaction_name[]"
+          placeholder="Reaction name"
+          style="max-width: 200px"
+        />
+        <textarea
+          class="form-control"
+          name="reaction_desc[]"
+          placeholder="Reaction description"
+          rows="2"
+        ></textarea>
+        <button
+          type="button"
+          class="btn btn-danger remove-reaction"
+          onclick="removeReaction(this)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+    <button type="button" class="btn btn-secondary" onclick="addReaction()">
+      Add Reaction
+    </button>
+    <div class="form-text">
+      Add any reactions the creature has, with their names and descriptions.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Legendary Actions (Optional)</label>
+    <div id="legendary-actions-container">
+      <div class="legendary-action-entry mb-3 p-3 border rounded">
+        <div class="input-group mb-2">
+          <input
+            type="text"
+            class="form-control"
+            name="legendary_action_name[]"
+            placeholder="Legendary action name"
+            style="max-width: 200px"
+          />
+          <textarea
+            class="form-control"
+            name="legendary_action_desc[]"
+            placeholder="Legendary action description"
+            rows="2"
+          ></textarea>
+          <button
+            type="button"
+            class="btn btn-danger remove-legendary-action"
+            onclick="removeLegendaryAction(this)"
+          >
+            Remove
+          </button>
+        </div>
+        <div class="nested-actions-section mb-2">
+          <label class="form-label">Nested Actions (Optional)</label>
+          <div class="nested-actions">
+            <!-- Nested actions will be added here -->
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            onclick="addNestedLegendaryAction(this)"
+          >
+            Add Nested Action
+          </button>
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      onclick="addLegendaryAction()"
+    >
+      Add Legendary Action
+    </button>
+    <div class="form-text">
+      Add legendary actions the creature can take, with their names and
+      descriptions.
     </div>
   </div>
 
@@ -483,6 +935,353 @@
     if (container.children.length > 1) {
       entry.remove();
     }
+  }
+
+  // Damage type management
+  function addDamageType(type) {
+    const container = document.getElementById(`${type}-container`);
+    const newEntry = document.createElement('div');
+    newEntry.className = 'input-group mb-2';
+    newEntry.innerHTML = `
+      <select class="form-select damage-type" name="${type}[]">
+        <option value="">Select damage type...</option>
+        <option value="Piercing">Piercing</option>
+        <option value="Slashing">Slashing</option>
+        <option value="Bludgeoning">Bludgeoning</option>
+        <option value="Acid">Acid</option>
+        <option value="Cold">Cold</option>
+        <option value="Fire">Fire</option>
+        <option value="Force">Force</option>
+        <option value="Lightning">Lightning</option>
+        <option value="Necrotic">Necrotic</option>
+        <option value="Poison">Poison</option>
+        <option value="Psychic">Psychic</option>
+        <option value="Radiant">Radiant</option>
+        <option value="Thunder">Thunder</option>
+      </select>
+      <button type="button" class="btn btn-danger remove-damage" onclick="removeDamageType(this)">Remove</button>
+    `;
+    container.appendChild(newEntry);
+  }
+
+  function removeDamageType(button) {
+    const entry = button.parentElement;
+    const container = entry.parentElement;
+
+    // Don't remove if it's the last entry
+    if (container.children.length > 1) {
+      entry.remove();
+    }
+  }
+
+  // Condition immunity management
+  function addCondition() {
+    const container = document.getElementById('condition-immunities-container');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'input-group mb-2';
+    newEntry.innerHTML = `
+      <select class="form-select condition-type" name="condition_immunity[]">
+        <option value="">Select condition...</option>
+        <option value="Blinded">Blinded</option>
+        <option value="Charmed">Charmed</option>
+        <option value="Deafened">Deafened</option>
+        <option value="Exhaustion">Exhaustion</option>
+        <option value="Frightened">Frightened</option>
+        <option value="Grappled">Grappled</option>
+        <option value="Incapacitated">Incapacitated</option>
+        <option value="Invisible">Invisible</option>
+        <option value="Necrotic">Necrotic</option>
+        <option value="Paralyzed">Paralyzed</option>
+        <option value="Petrified">Petrified</option>
+        <option value="Poisoned">Poisoned</option>
+        <option value="Prone">Prone</option>
+        <option value="Restrained">Restrained</option>
+        <option value="Stunned">Stunned</option>
+        <option value="Unconscious">Unconscious</option>
+      </select>
+      <button type="button" class="btn btn-danger remove-condition" onclick="removeCondition(this)">Remove</button>
+    `;
+    container.appendChild(newEntry);
+  }
+
+  function removeCondition(button) {
+    const entry = button.parentElement;
+    const container = document.getElementById('condition-immunities-container');
+
+    // Don't remove if it's the last entry
+    if (container.children.length > 1) {
+      entry.remove();
+    }
+  }
+
+  // Special senses management
+  function addSense() {
+    const container = document.getElementById('senses-container');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'input-group mb-2';
+    newEntry.innerHTML = `
+      <select class="form-select sense-type" name="sense_type[]">
+        <option value="">Select sense...</option>
+        <option value="blindsight">Blindsight</option>
+        <option value="darkvision">Darkvision</option>
+        <option value="tremorsense">Tremorsense</option>
+        <option value="truesight">Truesight</option>
+      </select>
+      <input type="number" class="form-control" name="sense_range[]" placeholder="Range in feet" min="0">
+      <button type="button" class="btn btn-danger remove-sense" onclick="removeSense(this)">Remove</button>
+    `;
+    container.appendChild(newEntry);
+  }
+
+  function removeSense(button) {
+    const entry = button.parentElement;
+    const container = document.getElementById('senses-container');
+
+    // Don't remove if it's the last entry
+    if (container.children.length > 1) {
+      entry.remove();
+    }
+  }
+
+  // Special abilities management
+  function addAbility() {
+    const container = document.getElementById('abilities-container');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'input-group mb-2';
+    newEntry.innerHTML = `
+      <input type="text" class="form-control" name="ability_name[]" placeholder="Ability name" style="max-width: 200px;">
+      <textarea class="form-control" name="ability_desc[]" placeholder="Ability description" rows="2"></textarea>
+      <button type="button" class="btn btn-danger remove-ability" onclick="removeAbility(this)">Remove</button>
+    `;
+    container.appendChild(newEntry);
+  }
+
+  function removeAbility(button) {
+    const entry = button.parentElement;
+    const container = document.getElementById('abilities-container');
+
+    // Don't remove if it's the last entry
+    if (container.children.length > 1) {
+      entry.remove();
+    }
+  }
+
+  // Actions management
+  function addAction() {
+    const container = document.getElementById('actions-container');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'action-entry mb-3 p-3 border rounded';
+    newEntry.innerHTML = `
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="action_name[]" placeholder="Action name">
+        </div>
+        <div class="col-md-4">
+          <input type="number" class="form-control" name="action_attack_bonus[]" placeholder="Attack bonus">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-danger w-100" onclick="removeAction(this)">Remove</button>
+        </div>
+      </div>
+      <div class="mb-2">
+        <textarea class="form-control" name="action_desc[]" placeholder="Action description (e.g. Melee Weapon Attack: +24 to hit, reach 10 ft., one target)" rows="2"></textarea>
+      </div>
+      <div class="damage-section mb-2">
+        <label class="form-label">Damage</label>
+        <div class="damage-entries">
+          <div class="damage-entry input-group mb-2">
+            <select class="form-select damage-type" name="action_damage_type[]">
+              <option value="">Select damage type...</option>
+              <option value="piercing">Piercing</option>
+              <option value="slashing">Slashing</option>
+              <option value="bludgeoning">Bludgeoning</option>
+              <option value="acid">Acid</option>
+              <option value="cold">Cold</option>
+              <option value="fire">Fire</option>
+              <option value="force">Force</option>
+              <option value="lightning">Lightning</option>
+              <option value="necrotic">Necrotic</option>
+              <option value="poison">Poison</option>
+              <option value="psychic">Psychic</option>
+              <option value="radiant">Radiant</option>
+              <option value="thunder">Thunder</option>
+            </select>
+            <input type="text" class="form-control" name="action_damage_dice[]" placeholder="Damage dice (e.g. 4d6+9)">
+            <button type="button" class="btn btn-danger" onclick="removeDamageEntry(this)">Remove</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="addDamageEntry(this)">Add Damage Type</button>
+      </div>
+      <div class="nested-actions-section mb-2">
+        <label class="form-label">Nested Actions (Optional)</label>
+        <div class="nested-actions">
+          <!-- Nested actions will be added here -->
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="addNestedAction(this)">Add Nested Action</button>
+      </div>
+    `;
+    container.appendChild(newEntry);
+  }
+
+  function removeAction(button) {
+    const entry = button.closest('.action-entry');
+    const container = document.getElementById('actions-container');
+
+    // Don't remove if it's the last entry
+    if (container.children.length > 1) {
+      entry.remove();
+    }
+  }
+
+  function addDamageEntry(button) {
+    const damageSection = button.closest('.damage-section');
+    const entriesContainer = damageSection.querySelector('.damage-entries');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'damage-entry input-group mb-2';
+    newEntry.innerHTML = `
+      <select class="form-select damage-type" name="action_damage_type[]">
+        <option value="">Select damage type...</option>
+        <option value="piercing">Piercing</option>
+        <option value="slashing">Slashing</option>
+        <option value="bludgeoning">Bludgeoning</option>
+        <option value="acid">Acid</option>
+        <option value="cold">Cold</option>
+        <option value="fire">Fire</option>
+        <option value="force">Force</option>
+        <option value="lightning">Lightning</option>
+        <option value="necrotic">Necrotic</option>
+        <option value="poison">Poison</option>
+        <option value="psychic">Psychic</option>
+        <option value="radiant">Radiant</option>
+        <option value="thunder">Thunder</option>
+      </select>
+      <input type="text" class="form-control" name="action_damage_dice[]" placeholder="Damage dice (e.g. 4d6+9)">
+      <button type="button" class="btn btn-danger" onclick="removeDamageEntry(this)">Remove</button>
+    `;
+    entriesContainer.appendChild(newEntry);
+  }
+
+  function removeDamageEntry(button) {
+    const entry = button.closest('.damage-entry');
+    const entriesContainer = entry.parentElement;
+
+    // Don't remove if it's the last entry
+    if (entriesContainer.children.length > 1) {
+      entry.remove();
+    }
+  }
+
+  function addNestedAction(button) {
+    const nestedSection = button.closest('.nested-actions-section');
+    const nestedContainer = nestedSection.querySelector('.nested-actions');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'nested-action mb-2 p-2 border rounded';
+    newEntry.innerHTML = `
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="nested_action_name[]" placeholder="Nested action name">
+        </div>
+        <div class="col-md-4">
+          <input type="number" class="form-control" name="nested_action_attack_bonus[]" placeholder="Attack bonus">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-danger w-100" onclick="removeNestedAction(this)">Remove</button>
+        </div>
+      </div>
+      <div class="mb-2">
+        <textarea class="form-control" name="nested_action_desc[]" placeholder="Nested action description" rows="2"></textarea>
+      </div>
+    `;
+    nestedContainer.appendChild(newEntry);
+  }
+
+  function removeNestedAction(button) {
+    const entry = button.closest('.nested-action');
+    entry.remove();
+  }
+
+  // Reactions management
+  function addReaction() {
+    const container = document.getElementById('reactions-container');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'input-group mb-2';
+    newEntry.innerHTML = `
+      <input type="text" class="form-control" name="reaction_name[]" placeholder="Reaction name" style="max-width: 200px;">
+      <textarea class="form-control" name="reaction_desc[]" placeholder="Reaction description" rows="2"></textarea>
+      <button type="button" class="btn btn-danger remove-reaction" onclick="removeReaction(this)">Remove</button>
+    `;
+    container.appendChild(newEntry);
+  }
+
+  function removeReaction(button) {
+    const entry = button.parentElement;
+    const container = document.getElementById('reactions-container');
+
+    // Don't remove if it's the last entry
+    if (container.children.length > 1) {
+      entry.remove();
+    }
+  }
+
+  // Legendary actions management
+  function addLegendaryAction() {
+    const container = document.getElementById('legendary-actions-container');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'legendary-action-entry mb-3 p-3 border rounded';
+    newEntry.innerHTML = `
+      <div class="input-group mb-2">
+        <input type="text" class="form-control" name="legendary_action_name[]" placeholder="Legendary action name" style="max-width: 200px;">
+        <textarea class="form-control" name="legendary_action_desc[]" placeholder="Legendary action description" rows="2"></textarea>
+        <button type="button" class="btn btn-danger remove-legendary-action" onclick="removeLegendaryAction(this)">Remove</button>
+      </div>
+      <div class="nested-actions-section mb-2">
+        <label class="form-label">Nested Actions (Optional)</label>
+        <div class="nested-actions">
+          <!-- Nested actions will be added here -->
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="addNestedLegendaryAction(this)">Add Nested Action</button>
+      </div>
+    `;
+    container.appendChild(newEntry);
+  }
+
+  function removeLegendaryAction(button) {
+    const entry = button.closest('.legendary-action-entry');
+    const container = document.getElementById('legendary-actions-container');
+
+    // Don't remove if it's the last entry
+    if (container.children.length > 1) {
+      entry.remove();
+    }
+  }
+
+  function addNestedLegendaryAction(button) {
+    const nestedSection = button.closest('.nested-actions-section');
+    const nestedContainer = nestedSection.querySelector('.nested-actions');
+    const newEntry = document.createElement('div');
+    newEntry.className = 'nested-action mb-2 p-2 border rounded';
+    newEntry.innerHTML = `
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <input type="text" class="form-control" name="nested_legendary_action_name[]" placeholder="Nested action name">
+        </div>
+        <div class="col-md-4">
+          <input type="number" class="form-control" name="nested_legendary_action_attack_bonus[]" placeholder="Attack bonus">
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-danger w-100" onclick="removeNestedLegendaryAction(this)">Remove</button>
+        </div>
+      </div>
+      <div class="mb-2">
+        <textarea class="form-control" name="nested_legendary_action_desc[]" placeholder="Nested action description" rows="2"></textarea>
+      </div>
+    `;
+    nestedContainer.appendChild(newEntry);
+  }
+
+  function removeNestedLegendaryAction(button) {
+    const entry = button.closest('.nested-action');
+    entry.remove();
   }
 </script>
 {% endblock %}

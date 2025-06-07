@@ -1,50 +1,62 @@
-{% extends "base.html" %} {% block content %}
-<h1>Search Creatures</h1>
-
-<div class="row mb-4">
-  <div class="col-md-6">
-    <form method="GET" class="d-flex">
-      <input
-        type="text"
-        name="q"
-        class="form-control me-2"
-        placeholder="Search by name, type, or description..."
-        value="{{ query }}"
-      />
-      <button type="submit" class="btn btn-primary">Search</button>
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h1>Search Creatures</h1>
+    
+    <form method="GET" class="mb-4">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" name="q" value="{{ query }}" placeholder="Search by name or description">
+            </div>
+            <div class="col-md-3">
+                <select class="form-select" name="type">
+                    <option value="">All Types</option>
+                    {% for type in creature_types %}
+                    <option value="{{ type }}" {% if type == selected_type %}selected{% endif %}>{{ type }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" name="min_cr" value="{{ min_cr }}" placeholder="Min CR" step="0.125" min="0">
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" name="max_cr" value="{{ max_cr }}" placeholder="Max CR" step="0.125" min="0">
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </div>
     </form>
-  </div>
-</div>
 
-{% if query %}
-<h2>Search Results for "{{ query }}"</h2>
-{% if creatures %}
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Size</th>
-        <th>Alignment</th>
-        <th>Challenge Rating</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for creature in creatures %}
-      <tr>
-        <td>{{ creature.name }}</td>
-        <td>{{ creature.type }}</td>
-        <td>{{ creature.size }}</td>
-        <td>{{ creature.alignment }}</td>
-        <td>{{ creature.challenge_rating }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+    {% if creatures %}
+    <div class="row">
+        {% for creature in creatures %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ creature.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ creature.type }}</h6>
+                    <p class="card-text">
+                        <strong>Size:</strong> {{ creature.size }}<br>
+                        <strong>CR:</strong> {{ creature.challenge_rating }}<br>
+                        <strong>Alignment:</strong> {{ creature.alignment }}
+                    </p>
+                    <p class="card-text">{{ creature.desc[:200] }}{% if creature.desc|length > 200 %}...{% endif %}</p>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-primary">CR {{ creature.challenge_rating }}</span>
+                        <span class="badge bg-secondary">{{ creature.type }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        No creatures found matching your search criteria.
+    </div>
+    {% endif %}
 </div>
-{% else %}
-<div class="alert alert-info">
-  No creatures found matching your search criteria.
-</div>
-{% endif %} {% endif %} {% endblock %}
+{% endblock %}
