@@ -1,0 +1,40 @@
+name: Deploy to Home Lab
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Add SSH known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Deploy to server
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} '
+            cd /opt/dnd-monster-data && \
+            # Create backup of MongoDB data
+            docker run --rm --volumes-from dnd_mongo -v $(pwd)/backups:/backup mongo:latest \
+              mongodump --out=/backup/$(date +%Y%m%d_%H%M%S) --uri="mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@localhost:27017/${MONGO_DB_NAME}" && \
+            # Pull latest changes
+            git pull && \
+            # Update containers without removing volumes
+            docker-compose -f docker-compose.prod.yml down && \
+            docker-compose -f docker-compose.prod.yml build --no-cache && \
+            docker-compose -f docker-compose.prod.yml up -d && \
+            # Clean up old backups (keep last 7 days)
+            find backups -type d -mtime +7 -exec rm -rf {} \; && \
+            # Clean up unused images
+            docker system prune -f'

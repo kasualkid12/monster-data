@@ -4,23 +4,56 @@ from bson.objectid import ObjectId
 import os
 import json
 from dotenv import load_dotenv
+import logging
+from logging.handlers import RotatingFileHandler
 
+# Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
+app.secret_key = os.getenv("SECRET_KEY", os.urandom(24))
 
-# MongoDB connection
-mongo_user = os.getenv("MONGO_USER", "admin")
-mongo_pass = os.getenv("MONGO_PASS", "changeme")
-mongo_db = os.getenv("MONGO_DB", "dnd_monster_data")
-mongo_host = os.getenv("MONGO_HOST", "mongo")
-mongo_port = os.getenv("MONGO_PORT", "27017")
+# Configure logging
+if not app.debug:
+    if not os.path.exists("logs"):
+        os.mkdir("logs")
+    file_handler = RotatingFileHandler("logs/app.log", maxBytes=10240, backupCount=10)
+    file_handler.setFormatter(
+        logging.Formatter(
+            "%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]"
+        )
+    )
+    file_handler.setLevel(logging.INFO)
+    app.logger.addHandler(file_handler)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info("DnD Monster Data startup")
 
-mongo_uri = f"mongodb://{mongo_user}:{mongo_pass}@{mongo_host}:{mongo_port}/"
-client = MongoClient(mongo_uri)
-db = client[mongo_db]
-creatures = db["creatures"]
+
+# MongoDB connection with retry logic
+def get_mongo_client():
+    mongo_user = os.getenv("MONGO_USER", "admin")
+    mongo_pass = os.getenv("MONGO_PASS", "changeme")
+    mongo_db = os.getenv("MONGO_DB", "dnd_monster_data")
+    mongo_host = os.getenv("MONGO_HOST", "mongo")
+    mongo_port = os.getenv("MONGO_PORT", "27017")
+
+    mongo_uri = f"mongodb://{mongo_user}:{mongo_pass}@{mongo_host}:{mongo_port}/"
+    try:
+        client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)
+        # Test the connection
+        client.admin.command("ping")
+        return client
+    except Exception as e:
+        app.logger.error(f"Failed to connect to MongoDB: {str(e)}")
+        raise
+
+
+try:
+    client = get_mongo_client()
+    db = client[os.getenv("MONGO_DB", "dnd_monster_data")]
+    creatures = db["creatures"]
+except Exception as e:
+    app.logger.error(f"Initial MongoDB connection failed: {str(e)}")
 
 
 @app.route("/")
@@ -329,4 +362,5 @@ def search():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
