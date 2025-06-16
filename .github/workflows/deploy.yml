@@ -17,25 +17,57 @@ jobs:
           ssh-private-key: |
             ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Debug SSH key
+        run: |
+          echo "Checking SSH key format..."
+          echo "Key length: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | wc -l) lines"
+          echo "First line: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | head -n 1)"
+          echo "Last line: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | tail -n 1)"
+
       - name: Add SSH known hosts
         run: |
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          echo "Added host key for ${{ secrets.SERVER_HOST }}"
+          cat ~/.ssh/known_hosts
 
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} '
+          echo "Starting deployment to ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}"
+          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} '
+            set -e
+            echo "Current directory: $(pwd)"
+            echo "Listing /opt/dnd-monster-data:"
+            ls -la /opt/dnd-monster-data || echo "Directory does not exist"
+            
             cd /opt/dnd-monster-data && \
-            # Create backup of MongoDB data
+            echo "Creating backup..." && \
             docker run --rm --volumes-from dnd_mongo -v $(pwd)/backups:/backup mongo:latest \
               mongodump --out=/backup/$(date +%Y%m%d_%H%M%S) --uri="mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@localhost:27017/${MONGO_DB_NAME}" && \
-            # Pull latest changes
+            echo "Backup created successfully" && \
+            
+            echo "Pulling latest changes..." && \
             git pull && \
-            # Update containers without removing volumes
+            echo "Changes pulled successfully" && \
+            
+            echo "Updating containers..." && \
             docker-compose -f docker-compose.prod.yml down && \
             docker-compose -f docker-compose.prod.yml build --no-cache && \
             docker-compose -f docker-compose.prod.yml up -d && \
-            # Clean up old backups (keep last 7 days)
+            echo "Containers updated successfully" && \
+            
+            echo "Cleaning up old backups..." && \
             find backups -type d -mtime +7 -exec rm -rf {} \; && \
-            # Clean up unused images
-            docker system prune -f'
+            echo "Cleanup completed" && \
+            
+            echo "Cleaning up unused images..." && \
+            docker system prune -f && \
+            echo "Deployment completed successfully"
+          ' || {
+            echo "Deployment failed"
+            echo "SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
+            echo "SSH_AGENT_PID: $SSH_AGENT_PID"
+            exit 1
+          }

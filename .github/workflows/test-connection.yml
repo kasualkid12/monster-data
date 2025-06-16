@@ -13,11 +13,28 @@ jobs:
           ssh-private-key: |
             ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Debug SSH key
+        run: |
+          echo "Checking SSH key format..."
+          echo "Key length: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | wc -l) lines"
+          echo "First line: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | head -n 1)"
+          echo "Last line: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | tail -n 1)"
+
       - name: Add SSH known hosts
         run: |
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
           ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          echo "Added host key for ${{ secrets.SERVER_HOST }}"
+          cat ~/.ssh/known_hosts
 
-      - name: Test connection
+      - name: Test connection with verbose output
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} 'echo "Connection successful!" && hostname && date'
+          echo "Testing SSH connection to ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}"
+          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} 'echo "Connection successful!" && hostname && date' || {
+            echo "SSH connection failed"
+            echo "SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
+            echo "SSH_AGENT_PID: $SSH_AGENT_PID"
+            exit 1
+          }
