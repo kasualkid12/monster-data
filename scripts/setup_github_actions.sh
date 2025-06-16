@@ -17,7 +17,9 @@ chmod 600 ~/.ssh/authorized_keys
 
 # Display the private key (to be added to GitHub secrets)
 echo "=== Add this private key to GitHub Secrets as SSH_PRIVATE_KEY ==="
-cat ~/.ssh/github_actions
+echo "-----BEGIN OPENSSH PRIVATE KEY-----"
+cat ~/.ssh/github_actions | grep -v "PRIVATE KEY" | tr -d '\n'
+echo "-----END OPENSSH PRIVATE KEY-----"
 echo "=== End of private key ==="
 
 # Create application directory with proper permissions
