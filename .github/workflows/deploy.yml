@@ -1,4 +1,4 @@
-name: Deploy to Home Lab
+name: Deploy to Production
 
 on:
   push:
@@ -9,65 +9,58 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Debug SSH key
+        run: |
+          echo "=== SSH Key Debug ==="
+          echo "Key length: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -l) lines"
+          echo "First line: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -n 1)"
+          echo "Last line: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | tail -n 1)"
+          echo "=== End SSH Key Debug ==="
 
-      - name: Set up SSH
+      - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: |
             ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Debug SSH key
-        run: |
-          echo "Checking SSH key format..."
-          echo "Key length: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | wc -l) lines"
-          echo "First line: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | head -n 1)"
-          echo "Last line: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | tail -n 1)"
-
-      - name: Add SSH known hosts
+      - name: Add known hosts
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          echo "Added host key for ${{ secrets.SERVER_HOST }}"
+          echo "=== Known Hosts ==="
           cat ~/.ssh/known_hosts
+          echo "=== End Known Hosts ==="
 
       - name: Deploy to server
         run: |
-          echo "Starting deployment to ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}"
-          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} '
-            set -e
-            echo "Current directory: $(pwd)"
-            echo "Listing /opt/dnd-monster-data:"
-            ls -la /opt/dnd-monster-data || echo "Directory does not exist"
+          echo "=== SSH Agent Status ==="
+          ssh-add -l
+          echo "=== End SSH Agent Status ==="
+
+          echo "=== Starting Deployment ==="
+          ssh -v -i ~/.ssh/github_actions -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} '
+            echo "Creating backup of MongoDB data..."
+            docker exec dnd_mongo mongodump --out /backup/$(date +%Y%m%d_%H%M%S)
             
-            cd /opt/dnd-monster-data && \
-            echo "Creating backup..." && \
-            docker run --rm --volumes-from dnd_mongo -v $(pwd)/backups:/backup mongo:latest \
-              mongodump --out=/backup/$(date +%Y%m%d_%H%M%S) --uri="mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@localhost:27017/${MONGO_DB_NAME}" && \
-            echo "Backup created successfully" && \
+            echo "Pulling latest changes..."
+            cd /home/kasu/grim-hallow-data
+            git pull origin main
             
-            echo "Pulling latest changes..." && \
-            git pull && \
-            echo "Changes pulled successfully" && \
+            echo "Updating containers..."
+            docker-compose -f docker-compose.prod.yml up -d --build
             
-            echo "Updating containers..." && \
-            docker-compose -f docker-compose.prod.yml down && \
-            docker-compose -f docker-compose.prod.yml build --no-cache && \
-            docker-compose -f docker-compose.prod.yml up -d && \
-            echo "Containers updated successfully" && \
+            echo "Cleaning up old backups (keeping last 5)..."
+            ls -t /backup | tail -n +6 | xargs -I {} rm -rf /backup/{}
             
-            echo "Cleaning up old backups..." && \
-            find backups -type d -mtime +7 -exec rm -rf {} \; && \
-            echo "Cleanup completed" && \
-            
-            echo "Cleaning up unused images..." && \
-            docker system prune -f && \
-            echo "Deployment completed successfully"
-          ' || {
-            echo "Deployment failed"
+            echo "Pruning unused Docker images..."
+            docker image prune -f
+          '
+          if [ $? -ne 0 ]; then
+            echo "=== SSH Environment ==="
             echo "SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
             echo "SSH_AGENT_PID: $SSH_AGENT_PID"
+            echo "=== End SSH Environment ==="
             exit 1
-          }
+          fi

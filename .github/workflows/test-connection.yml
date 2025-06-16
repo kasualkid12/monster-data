@@ -7,34 +7,42 @@ jobs:
   test-connection:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up SSH
+      - name: Debug SSH key
+        run: |
+          echo "=== SSH Key Debug ==="
+          echo "Key length: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | wc -l) lines"
+          echo "First line: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | head -n 1)"
+          echo "Last line: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | tail -n 1)"
+          echo "=== End SSH Key Debug ==="
+
+      - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: |
             ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Debug SSH key
-        run: |
-          echo "Checking SSH key format..."
-          echo "Key length: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | wc -l) lines"
-          echo "First line: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | head -n 1)"
-          echo "Last line: $(echo '${{ secrets.SSH_PRIVATE_KEY }}' | tail -n 1)"
-
-      - name: Add SSH known hosts
+      - name: Add known hosts
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
-          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          echo "Added host key for ${{ secrets.SERVER_HOST }}"
+          echo "=== Known Hosts ==="
           cat ~/.ssh/known_hosts
+          echo "=== End Known Hosts ==="
 
-      - name: Test connection with verbose output
+      - name: Test connection
         run: |
-          echo "Testing SSH connection to ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }}"
-          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_HOST }} 'echo "Connection successful!" && hostname && date' || {
-            echo "SSH connection failed"
+          echo "=== SSH Agent Status ==="
+          ssh-add -l
+          echo "=== End SSH Agent Status ==="
+
+          echo "=== SSH Connection Test ==="
+          ssh -v -i ~/.ssh/github_actions -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'Connection successful'"
+          if [ $? -ne 0 ]; then
+            echo "=== SSH Environment ==="
             echo "SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
             echo "SSH_AGENT_PID: $SSH_AGENT_PID"
+            echo "=== End SSH Environment ==="
             exit 1
-          }
+          fi
