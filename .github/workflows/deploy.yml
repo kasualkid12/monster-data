@@ -104,10 +104,15 @@ jobs:
             docker-compose -f docker-compose.prod.yml build --network host || {
               echo "Build failed with host network, trying with default network..."
               docker-compose -f docker-compose.prod.yml build || {
-                echo "Build failed with default network, trying offline build..."
-                # Try offline build approach
-                pip download --no-deps --dest ./packages flask pymongo python-dotenv || echo "Failed to download packages"
-                docker build --network host -t monster-data:offline . || docker build -t monster-data:offline .
+                echo "Build failed with default network, trying simple Dockerfile..."
+                # Try with simpler Dockerfile
+                cp Dockerfile.simple Dockerfile
+                docker-compose -f docker-compose.prod.yml build || {
+                  echo "Build failed with simple Dockerfile, trying offline build..."
+                  # Try offline build approach
+                  pip download --no-deps --dest ./packages flask pymongo python-dotenv || echo "Failed to download packages"
+                  docker build --network host -t monster-data:offline . || docker build -t monster-data:offline .
+                }
               }
             }
             docker-compose -f docker-compose.prod.yml up -d
