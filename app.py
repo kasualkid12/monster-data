@@ -6,6 +6,7 @@ import json
 from dotenv import load_dotenv
 import logging
 from logging.handlers import RotatingFileHandler
+from urllib.parse import quote_plus
 
 # Load environment variables
 load_dotenv()
@@ -37,7 +38,11 @@ def get_mongo_client():
     mongo_host = os.getenv("MONGO_HOST", "mongo")
     mongo_port = os.getenv("MONGO_PORT", "27017")
 
-    mongo_uri = f"mongodb://{mongo_user}:{mongo_pass}@{mongo_host}:{mongo_port}/"
+    # URL encode username and password to handle special characters
+    encoded_user = quote_plus(mongo_user)
+    encoded_pass = quote_plus(mongo_pass)
+
+    mongo_uri = f"mongodb://{encoded_user}:{encoded_pass}@{mongo_host}:{mongo_port}/"
     try:
         client = MongoClient(mongo_uri, serverSelectionTimeoutMS=5000)
         # Test the connection
@@ -48,18 +53,37 @@ def get_mongo_client():
         raise
 
 
+# Initialize MongoDB connection and collections
+client = None
+db = None
+creatures = None
+
 try:
     client = get_mongo_client()
     db = client[os.getenv("MONGO_DB", "dnd_monster_data")]
     creatures = db["creatures"]
+    app.logger.info("MongoDB connection established successfully")
 except Exception as e:
     app.logger.error(f"Initial MongoDB connection failed: {str(e)}")
+    # Initialize with None to prevent NameError
+    client = None
+    db = None
+    creatures = None
 
 
 @app.route("/")
 def index():
-    all_creatures = list(creatures.find())
-    return render_template("index.html", creatures=all_creatures)
+    if creatures is None:
+        flash("Database connection error. Please check the logs.", "error")
+        return render_template("index.html", creatures=[])
+
+    try:
+        all_creatures = list(creatures.find())
+        return render_template("index.html", creatures=all_creatures)
+    except Exception as e:
+        app.logger.error(f"Error fetching creatures: {str(e)}")
+        flash("Error loading creatures from database.", "error")
+        return render_template("index.html", creatures=[])
 
 
 def get_proficiency_bonus(cr):
@@ -297,15 +321,36 @@ def add_creature():
         }
 
         # Insert into MongoDB
-        creatures.insert_one(creature_data)
-        flash("Creature added successfully!", "success")
-        return redirect(url_for("index"))
+        if creatures is None:
+            flash("Database connection error. Cannot add creature.", "error")
+            return redirect(url_for("index"))
+
+        try:
+            creatures.insert_one(creature_data)
+            flash("Creature added successfully!", "success")
+            return redirect(url_for("index"))
+        except Exception as e:
+            app.logger.error(f"Error inserting creature: {str(e)}")
+            flash("Error adding creature to database.", "error")
+            return redirect(url_for("index"))
 
     return render_template("add.html")
 
 
 @app.route("/search")
 def search():
+    if creatures is None:
+        flash("Database connection error. Please check the logs.", "error")
+        return render_template(
+            "search.html",
+            creatures=[],
+            query="",
+            selected_type="",
+            min_cr="",
+            max_cr="",
+            creature_types=[],
+        )
+
     query = request.args.get("q", "")
     creature_type = request.args.get("type", "")
     min_cr = request.args.get("min_cr", "")
@@ -334,31 +379,44 @@ def search():
             cr_query["$lte"] = float(max_cr)
         search_query["challenge_rating"] = cr_query
 
-    # Get all creature types for the filter dropdown
-    all_types = creatures.distinct("type")
+    try:
+        # Get all creature types for the filter dropdown
+        all_types = creatures.distinct("type")
 
-    # Execute search
-    if search_query:
-        results = list(
-            creatures.find(search_query).sort(
-                [
-                    ("type", 1),  # Sort by type first
-                    ("challenge_rating", 1),  # Then by challenge rating
-                ]
+        # Execute search
+        if search_query:
+            results = list(
+                creatures.find(search_query).sort(
+                    [
+                        ("type", 1),  # Sort by type first
+                        ("challenge_rating", 1),  # Then by challenge rating
+                    ]
+                )
             )
-        )
-    else:
-        results = []
+        else:
+            results = []
 
-    return render_template(
-        "search.html",
-        creatures=results,
-        query=query,
-        selected_type=creature_type,
-        min_cr=min_cr,
-        max_cr=max_cr,
-        creature_types=all_types,
-    )
+        return render_template(
+            "search.html",
+            creatures=results,
+            query=query,
+            selected_type=creature_type,
+            min_cr=min_cr,
+            max_cr=max_cr,
+            creature_types=all_types,
+        )
+    except Exception as e:
+        app.logger.error(f"Error searching creatures: {str(e)}")
+        flash("Error searching database.", "error")
+        return render_template(
+            "search.html",
+            creatures=[],
+            query=query,
+            selected_type=creature_type,
+            min_cr=min_cr,
+            max_cr=max_cr,
+            creature_types=[],
+        )
 
 
 if __name__ == "__main__":
