@@ -15,6 +15,28 @@ jobs:
           echo "Last line: $(echo "${{ secrets.SSH_PRIVATE_KEY }}" | tail -n 1)"
           echo "=== End SSH Key Debug ==="
 
+      - name: Setup WireGuard VPN
+        run: |
+          echo "=== Setting up WireGuard VPN ==="
+          # Install WireGuard
+          sudo apt-get update
+          sudo apt-get install -y wireguard
+
+          # Create WireGuard config
+          sudo mkdir -p /etc/wireguard
+          echo "${{ secrets.WIREGUARD_CONFIG }}" | sudo tee /etc/wireguard/wg0.conf > /dev/null
+          sudo chmod 600 /etc/wireguard/wg0.conf
+
+          # Start WireGuard
+          sudo wg-quick up wg0
+
+          # Wait for connection
+          sleep 5
+
+          # Show connection status
+          sudo wg show
+          echo "=== VPN Setup Complete ==="
+
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:
@@ -38,7 +60,7 @@ jobs:
           echo "=== End SSH Agent Status ==="
 
           echo "=== SSH Connection Test ==="
-          ssh -v -i ~/.ssh/github_actions -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'Connection successful'"
+          ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'Connection successful'"
           if [ $? -ne 0 ]; then
             echo "=== SSH Environment ==="
             echo "SSH_AUTH_SOCK: $SSH_AUTH_SOCK"
@@ -46,3 +68,10 @@ jobs:
             echo "=== End SSH Environment ==="
             exit 1
           fi
+
+      - name: Cleanup VPN
+        if: always()
+        run: |
+          echo "=== Cleaning up VPN ==="
+          sudo wg-quick down wg0
+          echo "=== VPN Cleanup Complete ==="
