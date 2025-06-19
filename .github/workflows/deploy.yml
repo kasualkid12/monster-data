@@ -86,8 +86,8 @@ jobs:
               exit 1
             fi
             
-            # Create backup directory if it doesn't exist
-            mkdir -p /home/${{ secrets.SSH_USER }}/backup
+            # Create backup directory within project directory
+            mkdir -p ./backup
             
             echo "=== Creating backup of MongoDB data ==="
             if docker ps | grep -q dnd_mongo; then
@@ -103,7 +103,7 @@ jobs:
             docker-compose -f docker-compose.prod.yml up -d --build
             
             echo "=== Cleaning up old backups (keeping last 5) ==="
-            ls -t /backup | tail -n +6 | xargs -I {} rm -rf /backup/{} 2>/dev/null || true
+            ls -t ./backup | tail -n +6 | xargs -I {} rm -rf ./backup/{} 2>/dev/null || true
             
             echo "=== Pruning unused Docker images ==="
             docker image prune -f

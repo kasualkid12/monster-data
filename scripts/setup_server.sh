@@ -10,7 +10,7 @@ echo "=== Setting up Ubuntu Server for Monster Data ==="
 # Get the username from command line or default to kasu
 USERNAME=${1:-kasu}
 PROJECT_DIR="/home/$USERNAME/monster-data"
-BACKUP_DIR="/home/$USERNAME/backup"
+BACKUP_DIR="$PROJECT_DIR/backup"
 
 echo "Setting up for user: $USERNAME"
 echo "Project directory: $PROJECT_DIR"
@@ -46,7 +46,7 @@ echo "Creating project directory..."
 sudo mkdir -p $PROJECT_DIR
 sudo chown $USERNAME:$USERNAME $PROJECT_DIR
 
-# Create backup directory
+# Create backup directory within project directory
 echo "Creating backup directory..."
 sudo mkdir -p $BACKUP_DIR
 sudo chown $USERNAME:$USERNAME $BACKUP_DIR
@@ -133,7 +133,7 @@ docker-compose -f docker-compose.prod.yml up -d --build
 
 # Clean up old backups (keeping last 5)
 echo "Cleaning up old backups (keeping last 5)..."
-ls -t /backup | tail -n +6 | xargs -I {} rm -rf /backup/{} 2>/dev/null || true
+ls -t ./backup | tail -n +6 | xargs -I {} rm -rf ./backup/{} 2>/dev/null || true
 
 # Prune unused Docker images
 echo "Pruning unused Docker images..."
@@ -147,7 +147,6 @@ chmod +x $PROJECT_DIR/deploy.sh
 # Set proper permissions
 echo "Setting proper permissions..."
 sudo chown -R $USERNAME:$USERNAME $PROJECT_DIR
-sudo chown -R $USERNAME:$USERNAME $BACKUP_DIR
 
 # Add user to docker group (requires logout/login to take effect)
 echo "Adding user to docker group..."
