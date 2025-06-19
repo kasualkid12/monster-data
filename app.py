@@ -32,9 +32,9 @@ if not app.debug:
 
 # MongoDB connection with retry logic
 def get_mongo_client():
-    mongo_user = os.getenv("MONGO_USER", "admin")
-    mongo_pass = os.getenv("MONGO_PASS", "changeme")
-    mongo_db = os.getenv("MONGO_DB", "dnd_monster_data")
+    mongo_user = os.getenv("ONGO_INITDB_ROOT_USERNAME", "admin")
+    mongo_pass = os.getenv("MONGO_INITDB_ROOT_PASSWORD", "changeme")
+    mongo_db = os.getenv("MONGO_DB_NAME", "dnd_monster_data")
     mongo_host = os.getenv("MONGO_HOST", "mongo")
     mongo_port = os.getenv("MONGO_PORT", "27017")
 
