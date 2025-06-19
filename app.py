@@ -74,7 +74,6 @@ except Exception as e:
 @app.route("/")
 def index():
     if creatures is None:
-        flash("Database connection error. Please check the logs.", "error")
         return render_template("index.html", creatures=[])
 
     try:
