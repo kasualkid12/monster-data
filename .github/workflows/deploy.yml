@@ -63,21 +63,52 @@ jobs:
 
           echo "=== Starting Deployment ==="
           ssh -v -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} '
-            echo "Creating backup of MongoDB data..."
-            docker exec dnd_mongo mongodump --out /backup/$(date +%Y%m%d_%H%M%S)
+            echo "=== Checking server setup ==="
             
-            echo "Pulling latest changes..."
-            cd /home/kasu/grim-hallow-data
+            # Check if project directory exists
+            if [ ! -d "/home/${{ secrets.SSH_USER }}/monster-data" ]; then
+              echo "Project directory not found. Please run the setup script first."
+              exit 1
+            fi
+            
+            cd /home/${{ secrets.SSH_USER }}/monster-data
+            
+            # Check if git repository exists
+            if [ ! -d ".git" ]; then
+              echo "Git repository not found. Cloning..."
+              git clone https://github.com/your-username/monster-data.git .
+            fi
+            
+            # Check Docker permissions
+            if ! docker info > /dev/null 2>&1; then
+              echo "Docker permission denied. Please ensure user is in docker group."
+              echo "Run: newgrp docker"
+              exit 1
+            fi
+            
+            # Create backup directory if it doesn't exist
+            mkdir -p /home/${{ secrets.SSH_USER }}/backup
+            
+            echo "=== Creating backup of MongoDB data ==="
+            if docker ps | grep -q dnd_mongo; then
+              docker exec dnd_mongo mongodump --out /backup/$(date +%Y%m%d_%H%M%S) || echo "Backup failed, continuing..."
+            else
+              echo "MongoDB container not running, skipping backup"
+            fi
+            
+            echo "=== Pulling latest changes ==="
             git pull origin main
             
-            echo "Updating containers..."
+            echo "=== Updating containers ==="
             docker-compose -f docker-compose.prod.yml up -d --build
             
-            echo "Cleaning up old backups (keeping last 5)..."
-            ls -t /backup | tail -n +6 | xargs -I {} rm -rf /backup/{}
+            echo "=== Cleaning up old backups (keeping last 5) ==="
+            ls -t /backup | tail -n +6 | xargs -I {} rm -rf /backup/{} 2>/dev/null || true
             
-            echo "Pruning unused Docker images..."
+            echo "=== Pruning unused Docker images ==="
             docker image prune -f
+            
+            echo "=== Deployment Complete ==="
           '
           if [ $? -ne 0 ]; then
             echo "=== SSH Environment ==="

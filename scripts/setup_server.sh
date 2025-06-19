@@ -1,78 +1,172 @@
 #!/bin/bash
 
+# Server Setup Script for Monster Data
+# This script prepares the Ubuntu server for deployment
+
+set -e
+
+echo "=== Setting up Ubuntu Server for Monster Data ==="
+
+# Get the username from command line or default to kasu
+USERNAME=${1:-kasu}
+PROJECT_DIR="/home/$USERNAME/monster-data"
+BACKUP_DIR="/home/$USERNAME/backup"
+
+echo "Setting up for user: $USERNAME"
+echo "Project directory: $PROJECT_DIR"
+echo "Backup directory: $BACKUP_DIR"
+
 # Update system
+echo "Updating system packages..."
 sudo apt-get update
 sudo apt-get upgrade -y
 
-# Install Docker
-sudo apt-get install -y \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+# Install Docker if not already installed
+if ! command -v docker &> /dev/null; then
+    echo "Installing Docker..."
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sudo sh get-docker.sh
+    sudo usermod -aG docker $USERNAME
+    rm get-docker.sh
+else
+    echo "Docker already installed"
+fi
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+# Install Docker Compose if not already installed
+if ! command -v docker-compose &> /dev/null; then
+    echo "Installing Docker Compose..."
+    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+else
+    echo "Docker Compose already installed"
+fi
 
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# Create project directory
+echo "Creating project directory..."
+sudo mkdir -p $PROJECT_DIR
+sudo chown $USERNAME:$USERNAME $PROJECT_DIR
 
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+# Create backup directory
+echo "Creating backup directory..."
+sudo mkdir -p $BACKUP_DIR
+sudo chown $USERNAME:$USERNAME $BACKUP_DIR
 
-# Install Docker Compose
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+# Create logs directory
+echo "Creating logs directory..."
+sudo mkdir -p $PROJECT_DIR/logs
+sudo chown $USERNAME:$USERNAME $PROJECT_DIR/logs
 
-# Create application directory
-sudo mkdir -p /opt/dnd-monster-data
-sudo chown -R $USER:$USER /opt/dnd-monster-data
+# Set up environment file
+echo "Creating environment file..."
+cat > $PROJECT_DIR/.env << EOF
+MONGO_INITDB_ROOT_USERNAME=admin
+MONGO_INITDB_ROOT_PASSWORD=your_secure_password_here
+MONGO_DB_NAME=dnd_data
+SECRET_KEY=your_secret_key_here
+EOF
 
-# Set up firewall
-sudo ufw allow ssh
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
-sudo ufw enable
+sudo chown $USERNAME:$USERNAME $PROJECT_DIR/.env
+chmod 600 $PROJECT_DIR/.env
 
-# Create systemd service for automatic startup
-sudo tee /etc/systemd/system/dnd-monster-data.service << EOF
+# Create systemd service for auto-start
+echo "Creating systemd service..."
+sudo tee /etc/systemd/system/monster-data.service > /dev/null << EOF
 [Unit]
-Description=DnD Monster Data Application
-After=docker.service
+Description=Monster Data Application
 Requires=docker.service
+After=docker.service
 
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-WorkingDirectory=/opt/dnd-monster-data
+WorkingDirectory=$PROJECT_DIR
 ExecStart=/usr/local/bin/docker-compose -f docker-compose.prod.yml up -d
 ExecStop=/usr/local/bin/docker-compose -f docker-compose.prod.yml down
-TimeoutStartSec=0
+User=$USERNAME
+Group=$USERNAME
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
 # Enable and start the service
-sudo systemctl enable dnd-monster-data.service
-sudo systemctl start dnd-monster-data.service
+sudo systemctl daemon-reload
+sudo systemctl enable monster-data.service
 
 # Set up log rotation
-sudo tee /etc/logrotate.d/dnd-monster-data << EOF
-/opt/dnd-monster-data/logs/*.log {
+echo "Setting up log rotation..."
+sudo tee /etc/logrotate.d/monster-data > /dev/null << EOF
+$PROJECT_DIR/logs/*.log {
     daily
     missingok
-    rotate 14
+    rotate 7
     compress
     delaycompress
     notifempty
-    create 0640 www-data www-data
-    sharedscripts
+    create 644 $USERNAME $USERNAME
     postrotate
-        systemctl reload dnd-monster-data.service
+        systemctl reload monster-data.service
     endscript
 }
 EOF
 
-echo "Server setup complete!" 
+# Create deployment script
+echo "Creating deployment script..."
+cat > $PROJECT_DIR/deploy.sh << 'EOF'
+#!/bin/bash
+
+set -e
+
+echo "=== Starting Deployment ==="
+
+# Create backup
+echo "Creating backup of MongoDB data..."
+docker exec dnd_mongo mongodump --out /backup/$(date +%Y%m%d_%H%M%S) || echo "Backup failed, continuing..."
+
+# Pull latest changes
+echo "Pulling latest changes..."
+git pull origin main
+
+# Update containers
+echo "Updating containers..."
+docker-compose -f docker-compose.prod.yml up -d --build
+
+# Clean up old backups (keeping last 5)
+echo "Cleaning up old backups (keeping last 5)..."
+ls -t /backup | tail -n +6 | xargs -I {} rm -rf /backup/{} 2>/dev/null || true
+
+# Prune unused Docker images
+echo "Pruning unused Docker images..."
+docker image prune -f
+
+echo "=== Deployment Complete ==="
+EOF
+
+chmod +x $PROJECT_DIR/deploy.sh
+
+# Set proper permissions
+echo "Setting proper permissions..."
+sudo chown -R $USERNAME:$USERNAME $PROJECT_DIR
+sudo chown -R $USERNAME:$USERNAME $BACKUP_DIR
+
+# Add user to docker group (requires logout/login to take effect)
+echo "Adding user to docker group..."
+sudo usermod -aG docker $USERNAME
+
+echo ""
+echo "=== Server Setup Complete ==="
+echo ""
+echo "IMPORTANT: You need to log out and log back in for Docker permissions to take effect."
+echo "Or run: newgrp docker"
+echo ""
+echo "Next steps:"
+echo "1. Log out and log back in (or run 'newgrp docker')"
+echo "2. Clone your repository to $PROJECT_DIR"
+echo "3. Update the .env file with your actual passwords"
+echo "4. Test the deployment with: cd $PROJECT_DIR && ./deploy.sh"
+echo ""
+echo "GitHub Actions will use:"
+echo "- SSH_HOST: $(hostname -I | awk '{print $1}')"
+echo "- SSH_USER: $USERNAME"
+echo "- Project directory: $PROJECT_DIR"
+echo "- Backup directory: $BACKUP_DIR" 
