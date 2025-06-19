@@ -100,7 +100,12 @@ jobs:
             git pull origin main
             
             echo "=== Updating containers ==="
-            docker-compose -f docker-compose.prod.yml up -d --build
+            # Try building with host network to avoid DNS issues
+            docker-compose -f docker-compose.prod.yml build --network host || {
+              echo "Build failed with host network, trying with default network..."
+              docker-compose -f docker-compose.prod.yml build
+            }
+            docker-compose -f docker-compose.prod.yml up -d
             
             echo "=== Cleaning up old backups (keeping last 5) ==="
             ls -t ./backup | tail -n +6 | xargs -I {} rm -rf ./backup/{} 2>/dev/null || true
