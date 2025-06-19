@@ -12,7 +12,7 @@ from urllib.parse import quote_plus
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRET_KEY", os.urandom(24))
+app.secret_key = os.getenv("SECRET_KEY", os.urandom(24).hex())
 
 # Configure logging
 if not app.debug:
@@ -35,7 +35,7 @@ def get_mongo_client():
     mongo_user = os.getenv("ONGO_INITDB_ROOT_USERNAME", "admin")
     mongo_pass = os.getenv("MONGO_INITDB_ROOT_PASSWORD", "changeme")
     mongo_db = os.getenv("MONGO_DB_NAME", "dnd_monster_data")
-    mongo_host = os.getenv("MONGO_HOST", "mongo")
+    mongo_host = os.getenv("MONGO_HOST", "localhost")
     mongo_port = os.getenv("MONGO_PORT", "27017")
 
     # URL encode username and password to handle special characters
