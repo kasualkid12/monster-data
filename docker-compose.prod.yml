@@ -27,7 +27,7 @@ services:
     container_name: dnd_web
     restart: unless-stopped
     ports:
-      - '127.0.0.1:5000:5000' # Flask app port
+      - '0.0.0.0:5000:5000' # Allow external access to Flask app
     environment:
       - MONGO_USER=${MONGO_INITDB_ROOT_USERNAME}
       - MONGO_PASS=${MONGO_INITDB_ROOT_PASSWORD}
