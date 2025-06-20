@@ -1,6 +1,6 @@
 services:
   mongo:
-    image: mongo:latest
+    image: mongo:4.4
     container_name: dnd_mongo
     restart: always
     environment:
