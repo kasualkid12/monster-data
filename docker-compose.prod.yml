@@ -40,7 +40,6 @@ services:
       - ./logs:/app/logs
     networks:
       - backend
-      - frontend
     security_opt:
       - no-new-privileges:true
     ulimits:
@@ -54,8 +53,6 @@ services:
 networks:
   backend:
     internal: true # No external access
-  frontend:
-    # This network will be connected to nginx
 
 volumes:
   mongo_data:
