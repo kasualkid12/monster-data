@@ -23,7 +23,9 @@ services:
         hard: 40000
 
   web:
-    build: .
+    build:
+      context: .
+      network: host
     container_name: dnd_web
     restart: unless-stopped
     ports:
