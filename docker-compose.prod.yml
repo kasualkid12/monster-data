@@ -14,8 +14,6 @@ services:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     networks:
       - backend
-    security_opt:
-      - no-new-privileges:true
     ulimits:
       nproc: 65535
       nofile:
@@ -42,8 +40,7 @@ services:
       - ./logs:/app/logs
     networks:
       - backend
-    security_opt:
-      - no-new-privileges:true
+      - frontend
     ulimits:
       nproc: 65535
       nofile:
@@ -54,7 +51,9 @@ services:
 
 networks:
   backend:
-    internal: true # No external access
+    internal: true # No external access for backend communication
+  frontend:
+    internal: false # Allow external access for web traffic
 
 volumes:
   mongo_data:
