@@ -109,3 +109,7 @@ RuntimeError: The session is unavailable because no secret key was set.  Set the
 2025-06-26 19:43:09,220 ERROR: Initial MongoDB connection failed: mongo:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 5.0s, Topology Description: <TopologyDescription id: 685da2c83e789dd6f7d309bc, topology_type: Unknown, servers: [<ServerDescription ('mongo', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('mongo:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]> [in /app/app.py:67]
 2025-06-26 19:59:58,912 INFO: DnD Monster Data startup [in /app/app.py:30]
 2025-06-26 20:00:03,446 INFO: MongoDB connection established successfully [in /app/app.py:65]
+2025-06-26 20:13:10,563 INFO: DnD Monster Data startup [in /app/app.py:30]
+2025-06-26 20:13:15,585 INFO: MongoDB connection established successfully [in /app/app.py:65]
+2025-06-26 20:14:33,849 INFO: DnD Monster Data startup [in /app/app.py:30]
+2025-06-26 20:14:38,374 INFO: MongoDB connection established successfully [in /app/app.py:65]

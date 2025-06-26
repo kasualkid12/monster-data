@@ -40,7 +40,7 @@
   <div class="row">
     <div class="col-md-4 mb-3">
       <label for="size" class="form-label">Size</label>
-      <select class="form-select" id="size" name="size" required>
+      <select class="form-select" id="size" name="size" value="Medium" required>
         <option value="Tiny">Tiny</option>
         <option value="Small">Small</option>
         <option value="Medium">Medium</option>
@@ -198,6 +198,7 @@
         id="speed_walk"
         name="speed_walk"
         placeholder="e.g. 30 ft."
+        value="30 ft."
       />
     </div>
     <div class="col-md-4 mb-3">
@@ -252,7 +253,13 @@
   <div class="row">
     <div class="col-md-2 mb-3">
       <label for="strength" class="form-label">STR</label>
-      <input type="number" class="form-control" id="strength" name="strength" />
+      <input
+        type="number"
+        class="form-control"
+        id="strength"
+        name="strength"
+        value="10"
+      />
     </div>
     <div class="col-md-2 mb-3">
       <label for="dexterity" class="form-label">DEX</label>
@@ -261,6 +268,7 @@
         class="form-control"
         id="dexterity"
         name="dexterity"
+        value="10"
       />
     </div>
     <div class="col-md-2 mb-3">
@@ -270,6 +278,7 @@
         class="form-control"
         id="constitution"
         name="constitution"
+        value="10"
       />
     </div>
     <div class="col-md-2 mb-3">
@@ -279,22 +288,41 @@
         class="form-control"
         id="intelligence"
         name="intelligence"
+        value="10"
       />
     </div>
     <div class="col-md-2 mb-3">
       <label for="wisdom" class="form-label">WIS</label>
-      <input type="number" class="form-control" id="wisdom" name="wisdom" />
+      <input
+        type="number"
+        class="form-control"
+        id="wisdom"
+        name="wisdom"
+        value="10"
+      />
     </div>
     <div class="col-md-2 mb-3">
       <label for="charisma" class="form-label">CHA</label>
-      <input type="number" class="form-control" id="charisma" name="charisma" />
+      <input
+        type="number"
+        class="form-control"
+        id="charisma"
+        name="charisma"
+        value="10"
+      />
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 mb-3">
       <label for="languages" class="form-label">Languages</label>
-      <input type="text" class="form-control" id="languages" name="languages" />
+      <input
+        type="text"
+        class="form-control"
+        id="languages"
+        name="languages"
+        value="common"
+      />
     </div>
     <div class="col-md-6 mb-3">
       <label for="passive_perception" class="form-label"
@@ -305,6 +333,7 @@
         class="form-control"
         id="passive_perception"
         name="passive_perception"
+        value="13"
         required
       />
     </div>
