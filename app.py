@@ -418,6 +418,37 @@ def search():
         )
 
 
+@app.route("/delete/<creature_id>", methods=["POST"])
+def delete_creature(creature_id):
+    if creatures is None:
+        flash("Database connection error. Cannot delete creature.", "error")
+        return redirect(url_for("index"))
+
+    try:
+        # Convert string ID to ObjectId
+        object_id = ObjectId(creature_id)
+
+        # Find the creature to get its name for the flash message
+        creature = creatures.find_one({"_id": object_id})
+        if not creature:
+            flash("Creature not found.", "error")
+            return redirect(url_for("index"))
+
+        # Delete the creature
+        result = creatures.delete_one({"_id": object_id})
+
+        if result.deleted_count > 0:
+            flash(f"'{creature['name']}' has been deleted successfully!", "success")
+        else:
+            flash("Failed to delete creature.", "error")
+
+    except Exception as e:
+        app.logger.error(f"Error deleting creature: {str(e)}")
+        flash("Error deleting creature from database.", "error")
+
+    return redirect(url_for("index"))
+
+
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)

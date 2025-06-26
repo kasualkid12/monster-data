@@ -30,11 +30,19 @@
           </p>
         </div>
         <div class="card-footer">
-          <a
-            href="{{ url_for('search', q=creature.name) }}"
-            class="btn btn-sm btn-outline-primary"
-            >View Details</a
-          >
+          <div class="d-flex justify-content-between align-items-center">
+            <a
+              href="{{ url_for('search', q=creature.name) }}"
+              class="btn btn-sm btn-outline-primary"
+              >View Details</a
+            >
+            <button
+              class="btn btn-sm btn-outline-danger"
+              onclick="confirmDelete('{{ creature._id }}', '{{ creature.name }}')"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -48,4 +56,47 @@
     {% endfor %}
   </div>
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="deleteModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete <strong id="creatureName"></strong>?
+        This action cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <form id="deleteForm" method="POST" style="display: inline">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function confirmDelete(creatureId, creatureName) {
+    document.getElementById('creatureName').textContent = creatureName;
+    document.getElementById('deleteForm').action = '/delete/' + creatureId;
+    new bootstrap.Modal(document.getElementById('deleteModal')).show();
+  }
+</script>
 {% endblock %}
