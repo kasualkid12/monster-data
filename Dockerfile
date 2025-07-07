@@ -20,8 +20,11 @@ RUN pip install --no-cache-dir \
 # Copy the rest of the application
 COPY . .
 
+# Make startup script executable
+RUN chmod +x start.sh
+
 # Expose the port the app runs on
 EXPOSE 5000
 
 # Command to run the application
-CMD ["python", "app.py"]
+CMD ["./start.sh"]
